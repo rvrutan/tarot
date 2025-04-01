@@ -1,6 +1,6 @@
 import { useState } from 'react'
 // import './App.css'
-import Card from './components/card'
+import Card from './components/Card'
 // import 'm00.jpg' from '../../server/assets/cards'
 
 function App() {
