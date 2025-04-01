@@ -1,42 +1,25 @@
-// import { useState } from 'react'
-// // import './App.css'
-// import Card from './components/Card'
-// // import 'm00.jpg' from '../../server/assets/cards'
-
-// function App() {
-//   const [count, setCount] = useState(0)
-//   const name = "Fool"
-//   const image = '/cards/m00.jpg'
-
-//   return (
-//     <>
-//     <Card name={name} image={image}/>
-//     </>
-//   )
-// }
-
-// export default App
-
-// client/src/App.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BasicReading from './components/BasicReading';
-import cardsData from '../../server/assets/cards.json';
 
 function App() {
   const [readingCards, setReadingCards] = useState([]);
+  const [cardsData, setCardsData] = useState([]);
 
-  // Function to get three random cards from the deck
+  useEffect(() => {
+    fetch('http://localhost:3000/api/cards')
+      .then((res) => res.json())
+      .then((data) => setCardsData(data.cards))
+      .catch((error) => console.error('Error fetching cards:', error));
+  }, []);
+
   const getRandomCards = () => {
-    const deck = cardsData.cards;
-    // Shuffle the deck and take the first three cards
-    const shuffled = deck.slice().sort(() => Math.random() - 0.5);
+    if (!cardsData.length) return [];
+    const shuffled = [...cardsData].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, 3);
   };
 
-  // Handler for the "New Reading" button
   const handleNewReading = () => {
-    const cards = getRandomCards();
-    setReadingCards(cards);
+    setReadingCards(getRandomCards());
   };
 
   return (
