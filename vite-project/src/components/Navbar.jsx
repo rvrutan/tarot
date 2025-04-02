@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom" 
 
 export default function Navbar() {
   return (
@@ -31,7 +32,7 @@ export default function Navbar() {
       </div>
       <div className="navbar-end">
         <ul className="menu menu-horizontal px-1 hidden lg:flex">
-          <li><a>View all cards</a></li>
+          <li><Link to='view-all-cards'>View all cards</Link></li>
         </ul>
         <a className="btn">Github</a>
       </div>
