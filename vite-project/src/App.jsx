@@ -6,7 +6,7 @@ function App() {
 
   const handleNewReading = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/tarot-reading', {
+      const response = await fetch('http://localhost:3000/api/tarot-reading', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
