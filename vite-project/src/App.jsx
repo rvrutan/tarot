@@ -35,8 +35,8 @@ function App() {
             <header className="py-6 text-center">
               <h1 className="text-2xl font-bold">Tarot Reading</h1>
             </header>
-            <div className="container mx-auto p-4">
-              <h1 className="text-center mb-6 max-w-lg mx-auto">
+            <div className="container mx-auto">
+              <h1 className="text-center mb-2 max-w-lg mx-auto">
                 Tarot is an ancient practice of divination that dates back
                 centuries, utilizing a deck of 78 beautifully illustrated cards
                 to provide insight into your life’s journey. Tarot readings can help you explore your
