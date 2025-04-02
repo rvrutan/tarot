@@ -20,7 +20,7 @@ const BasicReading = ({ cards, reading, isUprights }) => {
 </div>
       {reading && (
         <div className="mt-5 p-4 border rounded">
-          <h2 className="text-xl font-semibold mb-3">Tarot Reading:</h2>
+          <h2 className="text-xl font-semibold mb-3">Tarot Reading</h2>
           <p>{reading}</p>
         </div>
       )}
