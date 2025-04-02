@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import BasicReading from "./components/BasicReading";
 import logo from "../src/assets/logo.png";
+import Navbar from './components/Navbar'
+
 
 function App() {
   const [readingData, setReadingData] = useState(null); // Store cards, reading, and isUprights
@@ -21,6 +23,8 @@ function App() {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="h-screen">
       <main className="container mx-auto p-4">
         <div className="text-center mb-4">
@@ -64,6 +68,7 @@ function App() {
         )}
       </main>
     </div>
+    </>
   );
 }
 
