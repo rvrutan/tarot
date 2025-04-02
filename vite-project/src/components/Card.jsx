@@ -23,13 +23,14 @@ const Card = ({ card, isUpright }) => {
       className={`w-full h-auto rounded-md mb-2 transform ${!isUpright ? "rotate-180" : ""}`}
     />
     {/* Arcana and Suit side by side */}
-    <div className="flex justify-between font-bold mb-2 w-full">
-      <span>{card.arcana}</span>
-      <span>{card.suit}</span>
+    <div className="p-4">
+      <div className="text-xl font-bold mb-2 w-full">
+        <span>{card.suit}</span>
+      </div>
+      {/* Description using Light = Upright, Dark = Reversed right now */}
+      <p className="italic">{meaning}</p>
+        </div>
     </div>
-    {/* Description using Light = Upright, Dark = Reversed right now */}
-    <p className="italic">{meaning}</p>
-  </div>
   );
 };
 
