@@ -16,7 +16,7 @@ const BasicReading = ({ cards }) => {
         const isUpright = coinFlip(); // Call coinFlip inside the map method
         return (
           <div key={index} className="flex-1 mx-2">
-            <h3 className="text-center text-lg font-semibold mb-2 text-black">
+            <h3 className="text-center text-lg font-semibold mb-2">
               {positions[index]}
             </h3>
             <Card card={card} isUpright={isUpright} />

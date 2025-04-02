@@ -23,20 +23,20 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="py-6 bg-primary text-white text-center">
+    <div className="min-h-screen ">
+      <header className="py-6  text-center">
         <h1 className="text-3xl font-bold">Tarot Reading</h1>
       </header>
       <main className="container mx-auto p-4">
         <div className="text-center mb-4">
-          <button onClick={handleNewReading} className="btn btn-lg btn-primary">
+          <button onClick={handleNewReading} className="btn btn-lg ">
             New Reading
           </button>
         </div>
         {readingCards.length === 3 ? (
           <BasicReading cards={readingCards} />
         ) : (
-          <p className="text-center text-xl text-gray-600">
+          <p className="text-center text-xl ">
             Click "New Reading" to get your cards.
           </p>
         )}

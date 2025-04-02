@@ -11,7 +11,7 @@ const Card = ({ card, isUpright }) => {
   const meaning = card.meanings[isUpright ? "light" : "shadow"][meaningIndex];
 
   return (
-    <div className="card shadow border border-gray-300 p-4 text-center rounded-lg text-black">
+    <div className="card shadow border  p-4 text-center rounded-lg ">
       {/* Card Name */}
       <h2 className="text-xl font-bold mb-2">{card.name}</h2>
       <h2 className={`text-xl font-bold mb-2 ${!isUpright ? "" : "hidden"}`}>Reversed</h2>
@@ -28,13 +28,13 @@ const Card = ({ card, isUpright }) => {
       />
 
       {/*Arcana and Suit side by side*/}
-      <div className="flex justify-between font-bold mb-2 text-black">
+      <div className="flex justify-between font-bold mb-2">
         <span>{card.arcana}</span>
         <span>{card.suit}</span>
       </div>
 
       {/*Description using Light = Upright, Dark = Reversed right now*/}
-      <p className="italic text-black">{meaning}</p>
+      <p className="italic ">{meaning}</p>
     </div>
   );
 };
