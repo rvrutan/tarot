@@ -1,37 +1,33 @@
 import React, { useState } from "react";
-
 import BasicReading from "../components/BasicReading";
-
 import logo from "../assets/logo.png";
-
 import Navbar from "../components/Navbar";
 
 export default function Homepage() {
   const [readingData, setReadingData] = useState(null); // Store cards, reading, and isUprights
-
   const [showInfo, setShowInfo] = useState(true); // Track visibility of the info section
-
   const [shrinkLogo, setShrinkLogo] = useState(false); // State to control logo size and position
 
   const handleNewReading = async () => {
     setShrinkLogo(true); // Shrink and move logo
-
     setShowInfo(false);
-
     setReadingData(null);
 
     try {
-      const response = await fetch("https://tarot-reader-server-930bdc8d0742.herokuapp.com/api/tarot-reading", {
-        method: "POST",
+      const response = await fetch(
+        "https://tarot-reader-server-930bdc8d0742.herokuapp.com/api/tarot-reading",
+        {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const data = await response.json();
 
-      setReadingData(data);
+      setReadingData(data); // Set the response containing cards, reading, and isUprights
     } catch (error) {
       console.error("Error fetching tarot reading:", error);
     }
@@ -50,10 +46,10 @@ export default function Homepage() {
               <div className="flex justify-center">
                 <img
                   src={logo}
-                  alt=""
+                  alt="Logo"
                   className={`transition-all duration-1000 ${
                     shrinkLogo ? "w-22 h-22 translate-y-[-50px]" : "w-48 h-48"
-                  } object-contain drop-shadow-lg `}
+                  } object-contain drop-shadow-lg`}
                 />
               </div>
 
@@ -67,14 +63,8 @@ export default function Homepage() {
                     showInfo ? "opacity-100" : "opacity-0 hidden"
                   }`}
                 >
-                  {" "}
                   Tarot is an ancient practice of divination that dates back
-                  centuries, utilizing a deck of 78 beautifully illustrated
-                  cards to provide insight into your life’s journey. Tarot
-                  readings can help you explore your past, understand your
-                  present circumstances, and glimpse potential paths for your
-                  future. Click the button below to get your personalized
-                  reading and uncover what the cards have in store for you!
+                  centuries...
                 </h1>
               </div>
             </div>
@@ -82,14 +72,11 @@ export default function Homepage() {
             <button
               onClick={() => {
                 setShowInfo(false);
-
                 setReadingData(null);
-
                 handleNewReading();
               }}
               className="btn btn-xl"
             >
-              {" "}
               New Reading
             </button>
           </div>
