@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom" 
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -25,16 +25,21 @@ export default function Navbar() {
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-          >
-          </ul>
+          ></ul>
         </div>
-        <a className="btn btn-ghost text-xl">Tarot</a>
+        <Link to="/" className="btn btn-ghost text-4xl">
+          Tarot
+        </Link>
       </div>
       <div className="navbar-end">
         <ul className="menu menu-horizontal px-1 hidden lg:flex">
-          <li><Link to='view-all-cards'>View all cards</Link></li>
+          <li>
+            <Link to="/" className="text-2xl">Home</Link>
+          </li>
+          <li>
+            <Link to="view-all-cards" className="text-2xl">View all cards</Link>
+          </li>
         </ul>
-        <a className="btn">Github</a>
       </div>
     </div>
   );
