@@ -11,7 +11,7 @@ const Card = ({ card, isUpright }) => {
   const meaning = card.meanings[isUpright ? "light" : "shadow"][meaningIndex];
 
   return (
-    <div className="card shadow border p-4 text-center rounded-lg h-[1000px] flex flex-col items-center rotate-y-180">
+    <div className="card shadow p-16 text-center rounded-lg h-[1000px] flex flex-col items-center rotate-y-180">
     {/* Card Name */}
     <h2 className="text-xl font-bold mb-2">{card.name}</h2>
     <h2 className={`badge badge-soft badge-lg p-4 flex items-center justify-center rounded-sm mb-4 w-full ${isUpright ? "invisible" : ""}`}>Reversed</h2>

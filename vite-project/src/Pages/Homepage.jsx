@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar'
 
 export default function Homepage() {
   const [readingData, setReadingData] = useState(null); // Store cards, reading, and isUprights
+  const [showInfo, setShowInfo] = useState(true); // Track visibility of the info section
 
   const handleNewReading = async () => {
     try {
@@ -39,8 +40,7 @@ export default function Homepage() {
               <h1 className="text-2xl font-bold">Tarot Reading</h1>
             </header>
             <div className="container mx-auto">
-              <h1 className="text-center mb-2 max-w-lg mx-auto">
-                Tarot is an ancient practice of divination that dates back
+            <h1 className={`text-center mb-2 max-w-lg mx-auto transition-opacity duration-1000 ease-in-out ${showInfo ? 'opacity-100' : 'opacity-0 hidden'}`}>                Tarot is an ancient practice of divination that dates back
                 centuries, utilizing a deck of 78 beautifully illustrated cards
                 to provide insight into your life’s journey. Tarot readings can help you explore your
                 past, understand your present circumstances, and glimpse
@@ -50,8 +50,7 @@ export default function Homepage() {
               </h1>
             </div>
           </div>
-          <button onClick={handleNewReading} className="btn btn-lg">
-            New Reading
+          <button onClick={() => { setShowInfo(false); setReadingData(null); handleNewReading(); }} className="btn btn-lg">            New Reading
           </button>
         </div>
         {readingData ? (
@@ -70,4 +69,3 @@ export default function Homepage() {
     </>
   );
 }
-
