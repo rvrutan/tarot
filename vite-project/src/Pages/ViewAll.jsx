@@ -18,3 +18,23 @@ export default function ViewAll() {
     </>
   );
 }
+
+
+
+const [readingData, setReadingData] = useState(null); // Store cards, reading, and isUprights
+
+const handleNewReading = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/api/tarot-reading', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    setReadingData(data);
+  } catch (error) {
+    console.error("Error fetching tarot reading:", error);
+  }
+};
+
