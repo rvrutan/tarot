@@ -9,7 +9,7 @@ export default function ViewAll() {
   useEffect(() => {
     const fetchReadingData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/all-cards");
+        const response = await fetch("https://tarot-reader-server-930bdc8d0742.herokuapp.com/api/all-cards");
         const data = await response.json();
         setReadingData(data);
       } catch (error) {

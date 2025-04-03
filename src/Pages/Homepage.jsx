@@ -21,7 +21,7 @@ export default function Homepage() {
     setReadingData(null);
 
     try {
-      const response = await fetch("http://localhost:3000/api/tarot-reading", {
+      const response = await fetch("https://tarot-reader-server-930bdc8d0742.herokuapp.com/api/tarot-reading", {
         method: "POST",
 
         headers: {
