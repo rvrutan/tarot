@@ -1,25 +1,36 @@
 import React, { useState } from "react";
+
 import BasicReading from "../components/BasicReading";
+
 import logo from "../assets/logo.png";
+
 import Navbar from "../components/Navbar";
 
 export default function Homepage() {
   const [readingData, setReadingData] = useState(null); // Store cards, reading, and isUprights
+
   const [showInfo, setShowInfo] = useState(true); // Track visibility of the info section
+
   const [shrinkLogo, setShrinkLogo] = useState(false); // State to control logo size and position
 
   const handleNewReading = async () => {
     setShrinkLogo(true); // Shrink and move logo
+
     setShowInfo(false);
+
     setReadingData(null);
+
     try {
       const response = await fetch("http://localhost:3000/api/tarot-reading", {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
         },
       });
+
       const data = await response.json();
+
       setReadingData(data);
     } catch (error) {
       console.error("Error fetching tarot reading:", error);
@@ -41,13 +52,15 @@ export default function Homepage() {
                   src={logo}
                   alt=""
                   className={`transition-all duration-1000 ${
-                    shrinkLogo ? "w-24 h-24 translate-y-[-50px]" : "w-48 h-48"
-                  } object-contain drop-shadow-lg animate-pulse`}
+                    shrinkLogo ? "w-22 h-22 translate-y-[-50px]" : "w-48 h-48"
+                  } object-contain drop-shadow-lg `}
                 />
               </div>
+
               <header className="text-center mb-2">
                 <h1 className="text-2xl font-bold">Tarot Reading</h1>
               </header>
+
               <div className="container mx-auto">
                 <h1
                   className={`text-center mb-4 max-w-lg mx-auto transition-opacity duration-10000 ease-in-out ${
@@ -65,10 +78,13 @@ export default function Homepage() {
                 </h1>
               </div>
             </div>
+
             <button
               onClick={() => {
                 setShowInfo(false);
+
                 setReadingData(null);
+
                 handleNewReading();
               }}
               className="btn btn-xl"
@@ -77,6 +93,7 @@ export default function Homepage() {
               New Reading
             </button>
           </div>
+
           {readingData ? (
             <BasicReading
               cards={readingData.cards}
@@ -84,8 +101,8 @@ export default function Homepage() {
               isUprights={readingData.isUprights}
             />
           ) : (
-            <p className="text-center text-xs text-yellow-800">
-              Click "New Reading" to get your cards.
+            <p className="text-center text-xs text-purple-900">
+              {/* Click "New Reading" to get your cards. */}
             </p>
           )}
         </main>
