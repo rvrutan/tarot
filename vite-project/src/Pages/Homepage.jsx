@@ -7,8 +7,12 @@ import Navbar from '../components/Navbar'
 export default function Homepage() {
   const [readingData, setReadingData] = useState(null); // Store cards, reading, and isUprights
   const [showInfo, setShowInfo] = useState(true); // Track visibility of the info section
+  const [shrinkLogo, setShrinkLogo] = useState(false); // State to control logo size and position
 
   const handleNewReading = async () => {
+    setShrinkLogo(true); // Shrink and move logo
+    setShowInfo(false);
+    setReadingData(null);
     try {
       const response = await fetch('http://localhost:3000/api/tarot-reading', {
         method: 'POST',
@@ -26,14 +30,14 @@ export default function Homepage() {
   return (
     <>
     <div className="h-screen">
-      <main className="container mx-auto p-4">
+      <main className={`container mx-auto p-4 transition-all duration-1000 ${shrinkLogo ? "translate-y-[-50px]" : ""}`}>
         <div className="text-center mb-4">
           <div className="mb-6">
             <div className="flex justify-center">
               <img
                 src={logo}
                 alt=""
-                className="w-48 h-48 object-contain drop-shadow-lg animate-pulse"
+                className={`transition-all duration-1000 ${shrinkLogo ? "w-24 h-24 translate-y-[-50px]" : "w-48 h-48"} object-contain drop-shadow-lg animate-pulse`}
               />
             </div>
             <header className="py-6 text-center">
