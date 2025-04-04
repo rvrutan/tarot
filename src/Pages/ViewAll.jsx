@@ -48,27 +48,32 @@ export default function ViewAll() {
   
 
   return (
-    <div>
-      {/* Sorting Dropdown */}
-      <div className="flex justify-end my-4 pt-4 pb-4 pr-[40px]">
-        <select
-          className="border p-2 rounded"
-          value={sortType}
-          onChange={(e) => setSortType(e.target.value)}
-        >
-          <option value="number">Number</option>
-          <option value="suit">Suit</option>
-          <option value="arcana">Arcana</option>
-        </select>
+    <div className="container mx-auto px-2 sm:px-4 py-6">
+      {/* Sorting Controls */}
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold mb-4 sm:mb-0">
+          All Tarot Cards
+        </h1>
+        <div className="form-control w-full sm:w-auto">
+          <select
+            className="select select-bordered w-full sm:w-48"
+            value={sortType}
+            onChange={(e) => setSortType(e.target.value)}
+          >
+            <option value="number">Number</option>
+            <option value="suit">Suit</option>
+            <option value="arcana">Arcana</option>
+          </select>
+        </div>
       </div>
 
       {/* Card Grid */}
-      <div className="flex flex-wrap justify-around">
+      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4">
         {sortedCards.map((card, index) => (
           <div
             key={index}
-            className="group transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:-translate-y-2 cursor-pointer"
             onClick={() => setSelectedCard(card)}
+            className="cursor-pointer hover:scale-105 transition-transform duration-300"
           >
             <SmallCard card={card} />
           </div>
