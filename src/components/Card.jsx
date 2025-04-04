@@ -4,7 +4,6 @@ const Card = ({ card, isUpright }) => {
   const [meaningIndex, setMeaningIndex] = useState(null);
 
   useEffect(() => {
-    // Only set the meaningIndex when it's first rendered
     if (meaningIndex === null) {
       setMeaningIndex(
         Math.floor(
@@ -20,11 +19,11 @@ const Card = ({ card, isUpright }) => {
       : "";
 
   return (
-    <div className="p-4 sm:p-6 text-center rounded-lg flex flex-col items-center rotate-y-180">
+    <div className="sm:p-6 text-center rounded-lg flex flex-col items-center rotate-y-180">
       <img
         src={`${import.meta.env.BASE_URL}cards/${card.img}`}
         alt={card.name}
-        className={`w-16 sm:w-40 h-auto rounded-md mb-3 sm:mb-2 transform ${
+        className={`w-32 sm:w-40 h-auto rounded-md mb-3 sm:mb-2 transform ${
           !isUpright ? "rotate-180" : ""
         }`}
       />
@@ -36,7 +35,7 @@ const Card = ({ card, isUpright }) => {
       >
         Reversed
       </h2>
-      <div className="p-2">
+      <div className="p-2 sm:block hidden">
         <p className="italic text-sm sm:text-base break-words">{meaning}</p>
       </div>
     </div>
