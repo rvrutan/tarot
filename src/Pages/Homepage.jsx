@@ -64,7 +64,12 @@ export default function Homepage() {
                   }`}
                 >
                   Tarot is an ancient practice of divination that dates back
-                  centuries...
+                  centuries, utilizing a deck of 78 beautifully illustrated
+                  cards to provide insight into your life’s journey. Tarot
+                  readings can help you explore your past, understand your
+                  present circumstances, and glimpse potential paths for your
+                  future. Click the button below to get your personalized
+                  reading and uncover what the cards have in store for you!{" "}
                 </h1>
               </div>
             </div>
@@ -88,7 +93,7 @@ export default function Homepage() {
               isUprights={readingData.isUprights}
             />
           ) : (
-            <p className="text-center text-xs text-purple-900">
+            <p className="text-center text-xs ">
               {/* Click "New Reading" to get your cards. */}
             </p>
           )}

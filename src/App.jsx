@@ -7,8 +7,8 @@ import { Outlet } from "react-router-dom";
 function App() {
   return (
     <>
-      <Navbar />
-      <main>
+      <main style={{ fontFamily: "'Philosopher', sans-serif" }}>
+        <Navbar />
         <Outlet />
       </main>
     </>
