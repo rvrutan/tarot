@@ -24,7 +24,7 @@ const Card = ({ card, isUpright }) => {
       <img
         src={`${import.meta.env.BASE_URL}cards/${card.img}`}
         alt={card.name}
-        className={`w-20 sm:w-40 h-auto rounded-md mb-3 sm:mb-2 transform ${
+        className={`w-16 sm:w-40 h-auto rounded-md mb-3 sm:mb-2 transform ${
           !isUpright ? "rotate-180" : ""
         }`}
       />
