@@ -66,21 +66,19 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
               }`}
               onClick={() => handleReveal(index)}
             >
-              <div className="flex items-center justify-center rounded-sm  w-full">
-                <h3 className="text-center text-xl font-semibold m-0">
-                  {positions[index]}
-                </h3>
-              </div>
-              <div
-                className={`transition-transform duration-700 ${
-                  revealed[index] ? "rotate-y-180" : ""
-                }`}
-              >
-                {revealed[index] ? (
-                  <Card card={card} isUpright={isUprights[index]} />
-                ) : (
-                  <img src={cardBackImage} alt="Card Back" className="w-80 ml-11" />
-                )}
+              <div className="flex flex-col items-center justify-center space-y-2">
+                <h3 className="text-xl font-semibold">{positions[index]}</h3>
+                <div
+                  className={`transition-transform duration-700 ${
+                    revealed[index] ? "rotate-y-180" : ""
+                  }`}
+                >
+                  {revealed[index] ? (
+                    <Card card={card} isUpright={isUprights[index]} />
+                  ) : (
+                    <img src={cardBackImage} alt="Card Back" className="w-64" />
+                  )}
+                </div>
               </div>
             </div>
           ))}
