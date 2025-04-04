@@ -6,31 +6,46 @@ import Navbar from "../components/Navbar";
 export default function Homepage() {
   const [readingData, setReadingData] = useState(null);
   const [showInfo, setShowInfo] = useState(true);
+  const [infoFadeOut, setInfoFadeOut] = useState(false);
   const [shrinkLogo, setShrinkLogo] = useState(false);
   const [showNewReadingButton, setShowNewReadingButton] = useState(false);
+  const [buttonFadeOut, setButtonFadeOut] = useState(false);
 
   const handleNewReading = async () => {
-    setShrinkLogo(true);
-    setShowInfo(false);
-    setReadingData(null);
-    setShowNewReadingButton(false);
+    // Start fade out animations
+    setButtonFadeOut(true);
+    setInfoFadeOut(true);
+    
+    // Wait for fade out animations to complete
+    setTimeout(async () => {
+      setShrinkLogo(true);
+      setShowInfo(false);
+      setReadingData(null);
+      setShowNewReadingButton(false);
 
-    try {
-      const response = await fetch(
-        "https://tarot-reader-server-930bdc8d0742.herokuapp.com/api/tarot-reading",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      try {
+        const response = await fetch(
+          "https://tarot-reader-server-930bdc8d0742.herokuapp.com/api/tarot-reading",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-      const data = await response.json();
-      setReadingData(data);
-    } catch (error) {
-      console.error("Error fetching tarot reading:", error);
-    }
+        const data = await response.json();
+        setReadingData(data);
+      } catch (error) {
+        console.error("Error fetching tarot reading:", error);
+      }
+    }, 500); // Wait for fade out animation
+  };
+
+  const handleRevealComplete = () => {
+    setButtonFadeOut(false);
+    setInfoFadeOut(false);
+    setShowNewReadingButton(true);
   };
 
   return (
@@ -56,23 +71,30 @@ export default function Homepage() {
               </div>
 
               <div className="container mx-auto">
-                <h1
-                  className={`text-center mb-4 max-w-lg mx-auto transition-opacity duration-10000 ease-in-out ${
-                    showInfo ? "opacity-100" : "opacity-0 hidden"
-                  }`}
-                >
-                 Tarot is an ancient practice of divination that dates back
-                  centuries, utilizing a deck of 78 beautifully illustrated
-                  cards to provide insight into your life’s journey. Tarot
-                  readings can help you explore your past, understand your
-                  present circumstances, and glimpse potential paths for your
-                  future. Click the button below to get your personalized
-                  reading and uncover what the cards have in store for you!                </h1>
+                {showInfo && (
+                  <h1
+                    className={`text-center mb-4 max-w-lg mx-auto transition-opacity duration-500 ${
+                      infoFadeOut ? "opacity-0" : "opacity-100"
+                    }`}
+                  >
+                   Tarot is an ancient practice of divination that dates back
+                    centuries, utilizing a deck of 78 beautifully illustrated
+                    cards to provide insight into your life's journey. Tarot
+                    readings can help you explore your past, understand your
+                    present circumstances, and glimpse potential paths for your
+                    future. Click the button below to get your personalized
+                    reading and uncover what the cards have in store for you!                  </h1>
+                )}
               </div>
             </div>
 
             {!readingData && (
-              <button onClick={handleNewReading} className="btn btn-xl">
+              <button 
+                onClick={handleNewReading} 
+                className={`btn btn-xl transition-opacity duration-500 ${
+                  buttonFadeOut ? 'opacity-0' : 'opacity-100'
+                }`}
+              >
                 New Reading
               </button>
             )}
@@ -83,7 +105,7 @@ export default function Homepage() {
               cards={readingData.cards}
               reading={readingData.reading}
               isUprights={readingData.isUprights}
-              onRevealComplete={() => setShowNewReadingButton(true)}
+              onRevealComplete={handleRevealComplete}
             />
           ) : (
             <p className="text-center text-xs "></p>
@@ -91,7 +113,12 @@ export default function Homepage() {
 
           {showNewReadingButton && (
             <div className="text-center mt-4">
-              <button onClick={handleNewReading} className="btn btn-xl">
+              <button 
+                onClick={handleNewReading} 
+                className={`btn btn-xl transition-opacity duration-500 ${
+                  buttonFadeOut ? 'opacity-0' : 'opacity-100'
+                }`}
+              >
                 New Reading
               </button>
             </div>

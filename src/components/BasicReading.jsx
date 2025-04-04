@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import cardBackImage from "/public/cards/aa-tarot-card-back-removebg-preview.png";
 import * as Tone from "tone";
@@ -8,6 +8,16 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
   const [revealed, setRevealed] = useState([false, false, false]);
   const [allRevealed, setAllRevealed] = useState(false);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [cardsVisible, setCardsVisible] = useState([false, false, false]);
+
+  // Add entrance animation for cards
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCardsVisible([true, false, false]);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleReveal = (index) => {
     const newRevealed = [...revealed];
@@ -22,14 +32,20 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
     setTimeout(() => {
       if (currentCardIndex < cards.length - 1) {
         setCurrentCardIndex(currentCardIndex + 1);
+        // Show next card with a delay
+        setTimeout(() => {
+          const newVisible = [...cardsVisible];
+          newVisible[currentCardIndex + 1] = true;
+          setCardsVisible(newVisible);
+        }, 500);
       }
-    }, 500); // Delay between revealing each card
+    }, 1500); // Increased delay between revealing each card
 
     if (newRevealed.every((r) => r)) {
       setTimeout(() => {
         setAllRevealed(true);
         if (onRevealComplete) onRevealComplete();
-      }, 500); // Delay text appearance after all cards are revealed
+      }, 1000); // Increased delay for text appearance
     }
   };
 
@@ -61,15 +77,17 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
           cards.map((card, index) => (
             <div
               key={index}
-              className={`flex-1 mx-2 cursor-pointer transition-opacity duration-700 ${
-                index <= currentCardIndex ? "opacity-100" : "opacity-0"
+              className={`flex-1 mx-2 cursor-pointer transition-all duration-1000 ${
+                cardsVisible[index]
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
               onClick={() => handleReveal(index)}
             >
               <div className="flex flex-col items-center justify-center space-y-2">
                 <h3 className="text-xl font-semibold">{positions[index]}</h3>
                 <div
-                  className={`transition-transform duration-700 ${
+                  className={`transition-all duration-1000 ${
                     revealed[index] ? "rotate-y-180" : ""
                   }`}
                 >
