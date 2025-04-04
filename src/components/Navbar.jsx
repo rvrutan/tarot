@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <div className="navbar bg-base-100 shadow-xl p-4">
+    <div className="navbar bg-base-100 shadow-xl">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -24,22 +24,33 @@ export default function Navbar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-          ></ul>
+            className="menu dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+          >
+            <li>
+              <Link to="/" className="text-lg">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="view-all-cards" className="text-lg">
+                View all cards
+              </Link>
+            </li>
+          </ul>
         </div>
-        <Link to="/" className="btn btn-ghost text-4xl">
+        <Link to="/" className="btn btn-ghost text-xl sm:text-3xl md:text-4xl">
           Tarot
         </Link>
       </div>
-      <div className="navbar-end">
-        <ul className="menu menu-horizontal px-1 hidden lg:flex">
+      <div className="navbar-end hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to="/" className="text-2xl">
+            <Link to="/" className="text-lg md:text-2xl">
               Home
             </Link>
           </li>
           <li>
-            <Link to="view-all-cards" className="text-2xl">
+            <Link to="view-all-cards" className="text-lg md:text-2xl">
               View all cards
             </Link>
           </li>

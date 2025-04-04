@@ -4,13 +4,13 @@ import logo from "../assets/logo.png";
 import Navbar from "../components/Navbar";
 
 export default function Homepage() {
-  const [readingData, setReadingData] = useState(null); // Store cards, reading, and isUprights
-  const [showInfo, setShowInfo] = useState(true); // Track visibility of the info section
-  const [shrinkLogo, setShrinkLogo] = useState(false); // State to control logo size and position
-  const [showNewReadingButton, setShowNewReadingButton] = useState(false); // State to control the visibility of the new reading button
+  const [readingData, setReadingData] = useState(null);
+  const [showInfo, setShowInfo] = useState(true);
+  const [shrinkLogo, setShrinkLogo] = useState(false);
+  const [showNewReadingButton, setShowNewReadingButton] = useState(false);
 
   const handleNewReading = async () => {
-    setShrinkLogo(true); // Shrink and move logo
+    setShrinkLogo(true);
     setShowInfo(false);
     setReadingData(null);
     setShowNewReadingButton(false);
@@ -20,7 +20,6 @@ export default function Homepage() {
         "https://tarot-reader-server-930bdc8d0742.herokuapp.com/api/tarot-reading",
         {
           method: "POST",
-
           headers: {
             "Content-Type": "application/json",
           },
@@ -28,8 +27,7 @@ export default function Homepage() {
       );
 
       const data = await response.json();
-
-      setReadingData(data); // Set the response containing cards, reading, and isUprights
+      setReadingData(data);
     } catch (error) {
       console.error("Error fetching tarot reading:", error);
     }
@@ -39,8 +37,8 @@ export default function Homepage() {
     <>
       <div className="h-screen">
         <main
-          className={`container mx-auto p-2 transition-all duration-1000 ${
-            shrinkLogo ? "translate-y-[-50px]" : ""
+          className={`container mx-auto p-2 pt-16 transition-all duration-1000 ${
+            shrinkLogo ? "translate-y-[-30px] sm:translate-y-[-50px]" : ""
           }`}
         >
           <div className="text-center mb-4">
@@ -50,7 +48,9 @@ export default function Homepage() {
                   src={logo}
                   alt="Logo"
                   className={`transition-all duration-1000 ${
-                    shrinkLogo ? "w-22 h-22 translate-y-[-50px]" : "w-48 h-48"
+                    shrinkLogo
+                      ? "w-24 h-22 sm:w-22 sm:h-44 translate-y-[-30px] sm:translate-y-[-50px]"
+                      : "w-32 h-32 sm:w-48 sm:h-48"
                   } object-contain drop-shadow-lg`}
                 />
               </div>
@@ -61,27 +61,18 @@ export default function Homepage() {
                     showInfo ? "opacity-100" : "opacity-0 hidden"
                   }`}
                 >
-                  Tarot is an ancient practice of divination that dates back
+                 Tarot is an ancient practice of divination that dates back
                   centuries, utilizing a deck of 78 beautifully illustrated
                   cards to provide insight into your life’s journey. Tarot
                   readings can help you explore your past, understand your
                   present circumstances, and glimpse potential paths for your
                   future. Click the button below to get your personalized
-                  reading and uncover what the cards have in store for you!{" "}
-                </h1>
+                  reading and uncover what the cards have in store for you!                </h1>
               </div>
             </div>
 
             {!readingData && (
-              <button
-                onClick={() => {
-                  setShowInfo(false);
-                  setReadingData(null);
-                  setShowNewReadingButton(false);
-                  handleNewReading();
-                }}
-                className="btn btn-xl"
-              >
+              <button onClick={handleNewReading} className="btn btn-xl">
                 New Reading
               </button>
             )}
@@ -95,22 +86,12 @@ export default function Homepage() {
               onRevealComplete={() => setShowNewReadingButton(true)}
             />
           ) : (
-            <p className="text-center text-xs ">
-              {/* Click "New Reading" to get your cards. */}
-            </p>
+            <p className="text-center text-xs "></p>
           )}
 
           {showNewReadingButton && (
             <div className="text-center mt-4">
-              <button
-                onClick={() => {
-                  setShowInfo(false);
-                  setReadingData(null);
-                  setShowNewReadingButton(false);
-                  handleNewReading();
-                }}
-                className="btn btn-xl"
-              >
+              <button onClick={handleNewReading} className="btn btn-xl">
                 New Reading
               </button>
             </div>
