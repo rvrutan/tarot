@@ -20,24 +20,24 @@ const Card = ({ card, isUpright }) => {
       : "";
 
   return (
-    <div className=" p-6 text-center rounded-lg flex flex-col items-center rotate-y-180">
+    <div className="p-4 sm:p-6 text-center rounded-lg flex flex-col items-center rotate-y-180">
       <img
         src={`${import.meta.env.BASE_URL}cards/${card.img}`}
         alt={card.name}
-        className={`w-40 h-auto rounded-md mb-2 transform ${
+        className={`w-32 sm:w-40 h-auto rounded-md mb-2 transform ${
           !isUpright ? "rotate-180" : ""
         }`}
       />
-      <h2 className="text-xl font-bold mb-2">{card.name}</h2>
+      <h2 className="text-lg sm:text-xl font-bold mb-2">{card.name}</h2>
       <h2
-        className={`badge badge-soft badge-lg p-2 flex items-center justify-center rounded-sm mb-4 w-32 ${
+        className={`badge badge-soft badge-lg p-2 flex items-center justify-center rounded-sm mb-4 w-24 sm:w-32 ${
           isUpright ? "invisible" : ""
         }`}
       >
         Reversed
       </h2>
       <div className="p-2">
-        <p className="italic">{meaning}</p>
+        <p className="italic text-sm sm:text-base">{meaning}</p>
       </div>
     </div>
   );
