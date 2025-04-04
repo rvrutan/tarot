@@ -7,11 +7,13 @@ export default function Homepage() {
   const [readingData, setReadingData] = useState(null); // Store cards, reading, and isUprights
   const [showInfo, setShowInfo] = useState(true); // Track visibility of the info section
   const [shrinkLogo, setShrinkLogo] = useState(false); // State to control logo size and position
+  const [showNewReadingButton, setShowNewReadingButton] = useState(false); // State to control the visibility of the new reading button
 
   const handleNewReading = async () => {
     setShrinkLogo(true); // Shrink and move logo
     setShowInfo(false);
     setReadingData(null);
+    setShowNewReadingButton(false);
 
     try {
       const response = await fetch(
@@ -53,10 +55,6 @@ export default function Homepage() {
                 />
               </div>
 
-              <header className="text-center mb-2">
-                <h1 className="text-2xl font-bold">Tarot Reading</h1>
-              </header>
-
               <div className="container mx-auto">
                 <h1
                   className={`text-center mb-4 max-w-lg mx-auto transition-opacity duration-10000 ease-in-out ${
@@ -74,16 +72,19 @@ export default function Homepage() {
               </div>
             </div>
 
-            <button
-              onClick={() => {
-                setShowInfo(false);
-                setReadingData(null);
-                handleNewReading();
-              }}
-              className="btn btn-xl"
-            >
-              New Reading
-            </button>
+            {!readingData && (
+              <button
+                onClick={() => {
+                  setShowInfo(false);
+                  setReadingData(null);
+                  setShowNewReadingButton(false);
+                  handleNewReading();
+                }}
+                className="btn btn-xl"
+              >
+                New Reading
+              </button>
+            )}
           </div>
 
           {readingData ? (
@@ -91,11 +92,28 @@ export default function Homepage() {
               cards={readingData.cards}
               reading={readingData.reading}
               isUprights={readingData.isUprights}
+              onRevealComplete={() => setShowNewReadingButton(true)}
             />
           ) : (
             <p className="text-center text-xs ">
               {/* Click "New Reading" to get your cards. */}
             </p>
+          )}
+
+          {showNewReadingButton && (
+            <div className="text-center mt-4">
+              <button
+                onClick={() => {
+                  setShowInfo(false);
+                  setReadingData(null);
+                  setShowNewReadingButton(false);
+                  handleNewReading();
+                }}
+                className="btn btn-xl"
+              >
+                New Reading
+              </button>
+            </div>
           )}
         </main>
       </div>

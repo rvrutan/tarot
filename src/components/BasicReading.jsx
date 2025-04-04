@@ -3,7 +3,7 @@ import Card from "./Card";
 import cardBackImage from "/public/cards/aa-tarot-card-back-removebg-preview.png";
 import * as Tone from "tone";
 
-const BasicReading = ({ cards, reading, isUprights }) => {
+const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
   const positions = ["Past", "Present", "Future"];
   const [revealed, setRevealed] = useState([false, false, false]);
   const [allRevealed, setAllRevealed] = useState(false);
@@ -26,7 +26,10 @@ const BasicReading = ({ cards, reading, isUprights }) => {
     }, 500); // Delay between revealing each card
 
     if (newRevealed.every((r) => r)) {
-      setTimeout(() => setAllRevealed(true), 500); // Delay text appearance after all cards are revealed
+      setTimeout(() => {
+        setAllRevealed(true);
+        if (onRevealComplete) onRevealComplete();
+      }, 500); // Delay text appearance after all cards are revealed
     }
   };
 
@@ -76,7 +79,7 @@ const BasicReading = ({ cards, reading, isUprights }) => {
                 {revealed[index] ? (
                   <Card card={card} isUpright={isUprights[index]} />
                 ) : (
-                  <img src={cardBackImage} alt="Card Back" className="" />
+                  <img src={cardBackImage} alt="Card Back" className="w-80 ml-11" />
                 )}
               </div>
             </div>
