@@ -34,10 +34,14 @@ export default function Navbar() {
       <div className="navbar-end">
         <ul className="menu menu-horizontal px-1 hidden lg:flex">
           <li>
-            <Link to="/" className="text-2xl">Home</Link>
+            <Link to="/" className="text-2xl">
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="view-all-cards" className="text-2xl">View all cards</Link>
+            <Link to="view-all-cards" className="text-2xl">
+              View all cards
+            </Link>
           </li>
         </ul>
       </div>

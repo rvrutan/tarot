@@ -7,7 +7,7 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
   const positions = ["Past", "Present", "Future"];
   const [revealed, setRevealed] = useState([false, false, false]);
   const [allRevealed, setAllRevealed] = useState(false);
-  const [currentCardIndex, setCurrentCardIndex] = useState(0); // Track the currently revealed card
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
   const handleReveal = (index) => {
     const newRevealed = [...revealed];

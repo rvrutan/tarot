@@ -81,7 +81,7 @@ export default function ViewAll() {
           <div className="modal-box">
             <h2 className="text-2xl text-center font-bold mb-2">{selectedCard.name}</h2>
             <p>{selectedCard.meanings.light.join(", ")}</p>
-            <p className="mt-2">{selectedCard.meanings.shadow.join(", ")}</p>
+            <p className="mt-2 text-center">{selectedCard.meanings.shadow.join(", ")}</p>
             <div className="modal-action">
               <button className="btn text-xl" onClick={() => setSelectedCard(null)}>Close</button>
             </div>

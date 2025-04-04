@@ -6,26 +6,36 @@ const Card = ({ card, isUpright }) => {
   useEffect(() => {
     // Only set the meaningIndex when it's first rendered
     if (meaningIndex === null) {
-      setMeaningIndex(Math.floor(Math.random() * card.meanings[isUpright ? "light" : "shadow"].length));
+      setMeaningIndex(
+        Math.floor(
+          Math.random() * card.meanings[isUpright ? "light" : "shadow"].length
+        )
+      );
     }
-  }, [meaningIndex, card, isUpright]); 
+  }, [meaningIndex, card, isUpright]);
 
-  const meaning = meaningIndex !== null ? card.meanings[isUpright ? "light" : "shadow"][meaningIndex] : "";
+  const meaning =
+    meaningIndex !== null
+      ? card.meanings[isUpright ? "light" : "shadow"][meaningIndex]
+      : "";
 
   return (
     <div className=" p-6 text-center rounded-lg flex flex-col items-center rotate-y-180">
-
-      {/* Card Image */}
       <img
         src={`${import.meta.env.BASE_URL}cards/${card.img}`}
         alt={card.name}
-        className={`w-40 h-auto rounded-md mb-2 transform ${!isUpright ? "rotate-180" : ""}`}
+        className={`w-40 h-auto rounded-md mb-2 transform ${
+          !isUpright ? "rotate-180" : ""
+        }`}
       />
-      {/* Card Name */}
       <h2 className="text-xl font-bold mb-2">{card.name}</h2>
-      <h2 className={`badge badge-soft badge-lg p-2 flex items-center justify-center rounded-sm mb-4 w-32 ${isUpright ? "invisible" : ""}`}>Reversed</h2>
-
-      {/* Meaning */}
+      <h2
+        className={`badge badge-soft badge-lg p-2 flex items-center justify-center rounded-sm mb-4 w-32 ${
+          isUpright ? "invisible" : ""
+        }`}
+      >
+        Reversed
+      </h2>
       <div className="p-2">
         <p className="italic">{meaning}</p>
       </div>
