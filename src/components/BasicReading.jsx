@@ -76,7 +76,7 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
                   {revealed[index] ? (
                     <Card card={card} isUpright={isUprights[index]} />
                   ) : (
-                    <img src={cardBackImage} alt="Card Back" className="w-64" />
+                    <img src={cardBackImage} alt="Card Back" className="w-79" />
                   )}
                 </div>
               </div>
