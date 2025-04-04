@@ -50,8 +50,7 @@ export default function ViewAll() {
   return (
     <div>
       {/* Sorting Dropdown */}
-      <div className="flex justify-center my-4">
-        <label className="mr-2">Sort by:</label>
+      <div className="flex justify-end my-4 pt-4 pb-4 pr-[40px]">
         <select
           className="border p-2 rounded"
           value={sortType}
