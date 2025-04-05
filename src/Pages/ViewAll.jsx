@@ -120,13 +120,13 @@ export default function ViewAll() {
             {/* Conditional Rendering of Pages */}
             {currentPage === 1 && (
               <div>
-                <p className="text-center">Fortune Telling</p>
+                <p className="text-center modal-header">Fortune Telling</p>
                 {selectedCard.fortune_telling.map((fortune, index) => (
                   <div key={index}>
                     <li>{fortune}</li>
                   </div>
                 ))}
-                <p className="text-center">Keywords</p>
+                <p className="text-center modal-header">Keywords</p>
                 {selectedCard.keywords.map((keywords, index) => (
                   <div key={index}>
                     <li className="capitalize">{keywords}</li>
@@ -137,13 +137,13 @@ export default function ViewAll() {
 
             {currentPage === 2 && (
               <div>
-                <p className="text-center">Upright Interpretations</p>
+                <p className="text-center modal-header">Upright Interpretations</p>
                 {selectedCard.meanings.light.map((meaning, index) => (
                   <div key={index}>
                     <li>{meaning}</li>
                   </div>
                 ))}
-                <p className="text-center">Reversed Interpretations</p>
+                <p className="text-center modal-header">Reversed Interpretations</p>
                 {selectedCard.meanings.shadow.map((meaning, index) => (
                   <div key={index}>
                     <li>{meaning}</li>
@@ -157,21 +157,21 @@ export default function ViewAll() {
                 {/* Conditionally render Mythical/Spiritual if it exists */}
                 {selectedCard.Spiritual && (
                   <>
-                    <p className="text-center">Mythical/Spiritual</p>
+                    <p className="text-center modal-header">Mythical/Spiritual</p>
                     <p>{selectedCard.Spiritual}</p>
                   </>
                 )}
 
-               {/* Conditionally render Affirmation if it exists */}
-               {selectedCard.Affirmation && (
+                {/* Conditionally render Affirmation if it exists */}
+                {selectedCard.Affirmation && (
                   <>
-                    <p className="text-center">Affirmation</p>
-                    <p>{selectedCard.Affirmation}</p>
+                    <p className="text-center modal-header">Affirmation</p>
+                    <p className="text-center">{selectedCard.Affirmation}</p>
                   </>
                 )}
 
                 {/* Always render Questions to Ask since it exists on every card */}
-                <p className="text-center">Questions to Ask</p>
+                <p className="text-center modal-header">Questions to Ask</p>
                 {selectedCard.Questions.map((questions, index) => (
                   <div key={index}>
                     <li>{questions}</li>

@@ -7,7 +7,8 @@ export default function PreviousReadingsPage() {
 
   // Load saved readings from localStorage
   useEffect(() => {
-    const storedReadings = JSON.parse(localStorage.getItem("savedReadings")) || [];
+    const storedReadings =
+      JSON.parse(localStorage.getItem("savedReadings")) || [];
     setSavedReadings(storedReadings);
   }, []);
 
@@ -17,30 +18,44 @@ export default function PreviousReadingsPage() {
     setSelectedReading(selected);
   };
 
+  const handleRemoveReading = () => {
+    // Retrieve existing saved readings
+    const savedReadings =
+      JSON.parse(localStorage.getItem("savedReadings")) || [];
+    savedReadings.pop(selectedReading);
+
+    localStorage.setItem("savedReadings", JSON.stringify(savedReadings));
+
+    location.reload();
+  };
+
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl text-center mb-6">Previous Tarot Readings</h1>
-
-      {/* Display a list of saved readings */}
-      <div className="mb-4">
+      <h1 className="text-2xl text-center mb-6">Your Tarot Readings</h1>
+      {/* Display a dropdown of saved readings */}
+      <div className="mb-4 text-center">
         {savedReadings.length === 0 ? (
-          <p>No saved readings found.</p>
-        ) : (
-          <ul>
-            {savedReadings.map((reading) => (
-              <li key={reading.key} className="mb-2">
-                <button
-                  onClick={() => handleSelectReading(reading.key)}
-                  className="btn btn-sm btn-outline"
-                >
-                  {reading.key} {/* Display the key (card names) */}
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
+          <p>No saved readings.</p>
+        ) : savedReadings.length >= 1 ? (
+          <div className="form-control">
+            <label className="label"></label>
+            <select
+              className="select select-bordered w-full max-w-xs mx-auto"
+              onChange={(e) => handleSelectReading(e.target.value)}
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Choose a Reading
+              </option>
+              {savedReadings.map((reading) => (
+                <option key={reading.key} value={reading.key}>
+                  {reading.key}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : null}
+      </div>{" "}
       {/* Display the selected reading if any */}
       {selectedReading && (
         <div>
@@ -50,6 +65,11 @@ export default function PreviousReadingsPage() {
             isUprights={selectedReading.isUprights}
             onRevealComplete={() => {}}
           />
+          <div className="text-center mt-4">
+            <button onClick={handleRemoveReading} className="btn btn-xl">
+              Remove Reading
+            </button>
+          </div>
         </div>
       )}
     </div>

@@ -9,13 +9,12 @@ export default function Homepage() {
   const [shrinkLogo, setShrinkLogo] = useState(false);
   const [showNewReadingButton, setShowNewReadingButton] = useState(false);
   const [buttonFadeOut, setButtonFadeOut] = useState(false);
-  
 
   const handleNewReading = async () => {
     // Start fade out animations
     setButtonFadeOut(true);
     setInfoFadeOut(true);
-    
+
     // Wait for fade out animations to complete
     setTimeout(async () => {
       setShrinkLogo(true);
@@ -73,26 +72,27 @@ export default function Homepage() {
               <div className="container mx-auto">
                 {showInfo && (
                   <h1
-                    className={`text-center mb-4 max-w-lg mx-auto transition-opacity duration-500 ${
+                    className={`text-center text-lg mb-4 max-w-lg mx-auto transition-opacity duration-500 mt-4 ${
                       infoFadeOut ? "opacity-0" : "opacity-100"
                     }`}
                   >
-                   Tarot is an ancient practice of divination that dates back
+                    Tarot is an ancient practice of divination that dates back
                     centuries, utilizing a deck of 78 beautifully illustrated
                     cards to provide insight into your life's journey. Tarot
                     readings can help you explore your past, understand your
                     present circumstances, and glimpse potential paths for your
                     future. Click the button below to get your personalized
-                    reading and uncover what the cards have in store for you!                  </h1>
+                    reading and uncover what the cards have in store for you!{" "}
+                  </h1>
                 )}
               </div>
             </div>
 
             {!readingData && (
-              <button 
-                onClick={handleNewReading} 
+              <button
+                onClick={handleNewReading}
                 className={`btn btn-xl transition-opacity duration-500 ${
-                  buttonFadeOut ? 'opacity-0' : 'opacity-100'
+                  buttonFadeOut ? "opacity-0" : "opacity-100"
                 }`}
               >
                 New Reading
@@ -113,10 +113,10 @@ export default function Homepage() {
 
           {showNewReadingButton && (
             <div className="text-center">
-              <button 
-                onClick={handleNewReading} 
+              <button
+                onClick={handleNewReading}
                 className={`btn btn-xl transition-opacity duration-500 ${
-                  buttonFadeOut ? 'opacity-0' : 'opacity-100'
+                  buttonFadeOut ? "opacity-0" : "opacity-100"
                 }`}
               >
                 New Reading
