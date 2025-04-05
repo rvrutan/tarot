@@ -5,11 +5,14 @@ export default function ViewAll() {
   const [readingData, setReadingData] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
   const [sortType, setSortType] = useState("number"); // Default sorting type
+  const [currentPage, setCurrentPage] = useState(1); // State to track the active page in the modal
 
   useEffect(() => {
     const fetchReadingData = async () => {
       try {
-        const response = await fetch("https://tarot-reader-server-930bdc8d0742.herokuapp.com/api/all-cards");
+        const response = await fetch(
+          "https://tarot-reader-server-930bdc8d0742.herokuapp.com/api/all-cards"
+        );
         const data = await response.json();
         setReadingData(data);
       } catch (error) {
@@ -45,7 +48,10 @@ export default function ViewAll() {
     }
     return 0;
   });
-  
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page); // Change to the selected page in the modal
+  };
 
   return (
     <div className="container mx-auto px-2 sm:px-4 py-6">
@@ -84,11 +90,99 @@ export default function ViewAll() {
       {selectedCard && (
         <dialog id="modal" className="modal modal-open">
           <div className="modal-box">
-            <h2 className="text-2xl text-center font-bold mb-2">{selectedCard.name}</h2>
-            <p>{selectedCard.meanings.light.join(", ")}</p>
-            <p className="mt-2 text-center">{selectedCard.meanings.shadow.join(", ")}</p>
+            <h2 className="text-2xl text-center font-bold mb-2">
+              {selectedCard.name}
+            </h2>
+
+            {/* Tabs for page navigation */}
+            <div className="tabs tabs-boxed mb-4">
+              <a
+                className={`tab ${currentPage === 1 ? "tab-active" : ""}`}
+                onClick={() => handlePageChange(1)}
+              >
+                Interpretations
+              </a>
+              <a
+                className={`tab ${currentPage === 2 ? "tab-active" : ""}`}
+                onClick={() => handlePageChange(2)}
+              >
+                Additional Info
+              </a>
+
+              <a
+                className={`tab ${currentPage === 3 ? "tab-active" : ""}`}
+                onClick={() => handlePageChange(3)}
+              >
+                Additional Info Cont'd
+              </a>
+            </div>
+
+            {/* Conditional Rendering of Pages */}
+            {currentPage === 1 && (
+              <div>
+                <p className="text-center">Fortune Telling</p>
+                {selectedCard.fortune_telling.map((fortune, index) => (
+                  <div key={index}>
+                    <li>{fortune}</li>
+                  </div>
+                ))}
+                <p className="text-center">Keywords</p>
+                {selectedCard.keywords.map((keywords, index) => (
+                  <div key={index}>
+                    <li className="capitalize">{keywords}</li>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {currentPage === 2 && (
+              <div>
+                <p className="text-center">Upright Interpretations</p>
+                {selectedCard.meanings.light.map((meaning, index) => (
+                  <div key={index}>
+                    <li>{meaning}</li>
+                  </div>
+                ))}
+                <p className="text-center">Reversed Interpretations</p>
+                {selectedCard.meanings.shadow.map((meaning, index) => (
+                  <div key={index}>
+                    <li>{meaning}</li>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {currentPage === 3 && (
+              <div>
+                <p className="text-center">Upright Interpretations</p>
+                {selectedCard.Spiritual.map((spirit, index) => (
+                  <div key={index}>
+                    <li>{spirit}</li>
+                  </div>
+                ))}
+                <p className="text-center">Reversed Interpretations</p>
+                {selectedCard.meanings.shadow.map((meaning, index) => (
+                  <div key={index}>
+                    <li>{meaning}</li>
+                  </div>
+                ))}
+                <p className="text-center">Reversed Interpretations</p>
+                {selectedCard.meanings.shadow.map((meaning, index) => (
+                  <div key={index}>
+                    <li>{meaning}</li>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Close Button */}
             <div className="modal-action">
-              <button className="btn text-xl" onClick={() => setSelectedCard(null)}>Close</button>
+              <button
+                className="btn text-xl"
+                onClick={() => setSelectedCard(null)}
+              >
+                Close
+              </button>
             </div>
           </div>
         </dialog>
