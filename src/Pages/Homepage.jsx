@@ -10,6 +10,7 @@ export default function Homepage() {
   const [shrinkLogo, setShrinkLogo] = useState(false);
   const [showNewReadingButton, setShowNewReadingButton] = useState(false);
   const [buttonFadeOut, setButtonFadeOut] = useState(false);
+  
 
   const handleNewReading = async () => {
     // Start fade out animations

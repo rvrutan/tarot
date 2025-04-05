@@ -9,6 +9,16 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
   const [allRevealed, setAllRevealed] = useState(false);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [cardsVisible, setCardsVisible] = useState([false, false, false]);
+  const [storeReading, setStoreReading] = useState([]);
+  const [saveButtonVisible, setSaveButtonVisible] = useState(true); // State for button visibility
+
+  const readingKey = cards.map((card) => card.name).join("-"); // Create a key from the card names
+
+  useEffect(() => {
+    const savedReadings = JSON.parse(localStorage.getItem("savedReadings")) || [];
+    const readingExists = savedReadings.some((savedReading) => savedReading.key === readingKey);
+    setSaveButtonVisible(!readingExists); // Hide button if reading exists
+  }, [cards]);
 
   // Add entrance animation for cards
   useEffect(() => {
@@ -93,7 +103,24 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
     }, 5000); // give time for release to finish
   };
   
-  
+  const handleSaveReading = () => {
+    const newReading = {
+      key: readingKey, // Use the key made from the card names
+      cards: cards,
+      reading: reading,
+      isUprights: isUprights,
+    };
+
+    // Retrieve existing saved readings
+    const savedReadings = JSON.parse(localStorage.getItem("savedReadings")) || [];
+    savedReadings.push(newReading);
+
+    // Save updated readings to localStorage
+    localStorage.setItem("savedReadings", JSON.stringify(savedReadings));
+
+    // Hide the save button after saving
+    setSaveButtonVisible(false);
+  };
 
   return (
     <div>
@@ -135,8 +162,18 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
             Tarot Reading
           </h2>
           <p>{reading}</p>
+          </div>
+      )}
+
+      {/* Conditional "Save This Reading" button */}
+      {saveButtonVisible && (
+        <div className="text-center mt-4">
+          <button onClick={handleSaveReading} className="btn btn-lg btn-outline">
+            Save This Reading
+          </button>
         </div>
       )}
+
     </div>
   );
 };
