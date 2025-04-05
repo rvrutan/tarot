@@ -154,19 +154,19 @@ export default function ViewAll() {
 
             {currentPage === 3 && (
               <div>
-                <p className="text-center">Upright Interpretations</p>
+                <p className="text-center">Mythical/Spiritual</p>
                 {selectedCard.Spiritual.map((spirit, index) => (
                   <div key={index}>
                     <li>{spirit}</li>
                   </div>
                 ))}
-                <p className="text-center">Reversed Interpretations</p>
-                {selectedCard.meanings.shadow.map((meaning, index) => (
+                <p className="text-center">Affirmations</p>
+                {selectedCard.Affirmation.map((meaning, index) => (
                   <div key={index}>
                     <li>{meaning}</li>
                   </div>
                 ))}
-                <p className="text-center">Reversed Interpretations</p>
+                <p className="text-center">Questions to Ask</p>
                 {selectedCard.meanings.shadow.map((meaning, index) => (
                   <div key={index}>
                     <li>{meaning}</li>
