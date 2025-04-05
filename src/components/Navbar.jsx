@@ -33,12 +33,12 @@ export default function Navbar() {
             </li>
             <li>
               <Link to="view-all-cards" className="text-lg">
-                View all cards
+                Explore Deck
               </Link>
             </li>
             <li>
             <Link to="view-prev-read" className="text-lg">
-              View Previous Readings
+              Your Readings
             </Link>
           </li>
           </ul>

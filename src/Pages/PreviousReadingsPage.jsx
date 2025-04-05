@@ -31,7 +31,7 @@ export default function PreviousReadingsPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl text-center mb-6">Your Tarot Readings</h1>
+      <h1 className="text-2xl text-center mb-6">Your Readings</h1>
       {/* Display a dropdown of saved readings */}
       <div className="mb-4 text-center">
         {savedReadings.length === 0 ? (
