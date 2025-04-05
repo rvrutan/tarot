@@ -154,22 +154,27 @@ export default function ViewAll() {
 
             {currentPage === 3 && (
               <div>
-                <p className="text-center">Mythical/Spiritual</p>
-                {selectedCard.Spiritual.map((spirit, index) => (
-                  <div key={index}>
-                    <li>{spirit}</li>
-                  </div>
-                ))}
-                <p className="text-center">Affirmations</p>
-                {selectedCard.Affirmation.map((meaning, index) => (
-                  <div key={index}>
-                    <li>{meaning}</li>
-                  </div>
-                ))}
+                {/* Conditionally render Mythical/Spiritual if it exists */}
+                {selectedCard.Spiritual && (
+                  <>
+                    <p className="text-center">Mythical/Spiritual</p>
+                    <p>{selectedCard.Spiritual}</p>
+                  </>
+                )}
+
+               {/* Conditionally render Affirmation if it exists */}
+               {selectedCard.Affirmation && (
+                  <>
+                    <p className="text-center">Affirmation</p>
+                    <p>{selectedCard.Affirmation}</p>
+                  </>
+                )}
+
+                {/* Always render Questions to Ask since it exists on every card */}
                 <p className="text-center">Questions to Ask</p>
-                {selectedCard.meanings.shadow.map((meaning, index) => (
+                {selectedCard.Questions.map((questions, index) => (
                   <div key={index}>
-                    <li>{meaning}</li>
+                    <li>{questions}</li>
                   </div>
                 ))}
               </div>
