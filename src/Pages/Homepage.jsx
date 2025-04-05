@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import BasicReading from "../components/BasicReading";
 import logo from "../assets/logo.png";
-import Navbar from "../components/Navbar";
 
 export default function Homepage() {
   const [readingData, setReadingData] = useState(null);
@@ -113,7 +112,7 @@ export default function Homepage() {
           )}
 
           {showNewReadingButton && (
-            <div className="text-center mt-4">
+            <div className="text-center">
               <button 
                 onClick={handleNewReading} 
                 className={`btn btn-xl transition-opacity duration-500 ${

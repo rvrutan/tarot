@@ -37,7 +37,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-            <Link to="view-prev-read" className="text-lg md:text-2xl">
+            <Link to="view-prev-read" className="text-lg">
               View Previous Readings
             </Link>
           </li>
@@ -56,12 +56,12 @@ export default function Navbar() {
           </li>
           <li>
             <Link to="view-all-cards" className="text-lg md:text-2xl">
-              View all cards
+              Explore Deck
             </Link>
           </li>
           <li>
             <Link to="view-prev-read" className="text-lg md:text-2xl">
-              View Previous Readings
+              Your Readings
             </Link>
           </li>
         </ul>

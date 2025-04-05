@@ -124,7 +124,7 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
 
   return (
     <div>
-      <div className="flex justify-around items-stretch my-10">
+      <div className="flex justify-around items-stretch mt-10">
         {cards &&
           cards.map((card, index) => (
             <div
@@ -155,24 +155,24 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
       </div>
       {allRevealed && (
         <div
-          className="p-4 opacity-0 transition-opacity duration-1000 ease-in border rounded text-center text-lg"
+          className="p-4 opacity-0 transition-opacity duration-1000 ease-in  text-center text-lg"
           style={{ opacity: allRevealed ? 1 : 0 }}
         >
-          <h2 className="text-2xl font-semibold mb-2 text-center">
+          <h2 className="text-2xl font-semibold mb-1 text-center">
             Tarot Reading
           </h2>
           <p>{reading}</p>
-          </div>
-      )}
-
-      {/* Conditional "Save This Reading" button */}
+               {/* Conditional "Save This Reading" button */}
       {saveButtonVisible && (
         <div className="text-center mt-4">
-          <button onClick={handleSaveReading} className="btn btn-lg btn-outline">
+          <button onClick={handleSaveReading} className="btn btn-xl">
             Save This Reading
           </button>
         </div>
       )}
+ </div>
+      )}
+
 
     </div>
   );
