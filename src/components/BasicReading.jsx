@@ -50,25 +50,50 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
   };
 
   const playChord = (chord) => {
-    // Convert note numbers to Tone.js Note strings
     const notes = chord.map((note) => Tone.Frequency(note, "midi").toNote());
-
-    // Create a new synth and apply volume control
-    const synth = new Tone.PolySynth(Tone.Synth).toDestination();
-
-    // Reduce the volume to 50% (approximately -6 dB)
-    synth.set({
-      volume: -24, // Reduces the volume by 50%
-    });
-
-    // Play the chord
+  
+    const reverb = new Tone.Reverb({
+      decay: 6,
+      preDelay: 0.01,
+      wet: 0.6,
+    }).toDestination();
+  
+    reverb.generate();
+  
+    const chorus = new Tone.Chorus(4, 2.5, 0.3).start();
+    chorus.wet.value = 0.5;
+  
+    const filter = new Tone.Filter(1000, "lowpass"); // roll off the high end, less harsh
+  
+    const synth = new Tone.PolySynth(Tone.Synth, {
+      oscillator: { type: "triangle" }, //can swap in sine, square, sawtooth, or triangle
+      envelope: {
+        attack: 1,
+        decay: 0.5,
+        sustain: 0.7,
+        release: 8, // this is the big fade out part
+      },
+      volume: -24,
+    }).chain(chorus, filter, reverb);
+  
+    // Start the chord
     synth.triggerAttack(notes);
-
-    // Stop the chord after 2 seconds
+  
+    // Let it ring, then release
     setTimeout(() => {
-      synth.triggerRelease(notes);
-    }, 2000);
+      synth.triggerRelease(notes); // begins the fade-out
+    }, 2000); // sustain for 3 seconds
+  
+    // Dispose everything a bit after release finishes
+    setTimeout(() => {
+      synth.dispose();
+      chorus.dispose();
+      filter.dispose();
+      reverb.dispose();
+    }, 5000); // give time for release to finish
   };
+  
+  
 
   return (
     <div>
