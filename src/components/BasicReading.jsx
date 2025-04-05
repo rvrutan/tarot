@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
-import cardBackImage from "/public/cards/aa-tarot-card-back-removebg-preview.png";
+import cardBackImage from "/public/cards/aa2-tarot-card-back-removebg-preview.png";
 import * as Tone from "tone";
 
 const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
@@ -119,7 +119,7 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
                   {revealed[index] ? (
                     <Card card={card} isUpright={isUprights[index]} />
                   ) : (
-                    <img src={cardBackImage} alt="Card Back" className="w-79" />
+                    <img src={cardBackImage} alt="Card Back" className="w-32 sm:w-40 h-auto rounded-md mb-3 sm:mb-2 mt-0 sm:mt-6" />
                   )}
                 </div>
               </div>
