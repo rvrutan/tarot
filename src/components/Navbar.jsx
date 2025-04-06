@@ -5,7 +5,12 @@ export default function Navbar() {
   return (
     <div className="navbar bg-base-100 shadow-xl">
       <div className="navbar-start">
-        <div className="dropdown">
+        <Link to="/" className="btn btn-ghost text-xl sm:text-3xl md:text-4xl">
+          Tarot
+        </Link>
+      </div>
+      <div className="navbar-end">
+        <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -48,12 +53,7 @@ export default function Navbar() {
             </li>
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost text-xl sm:text-3xl md:text-4xl">
-          Tarot
-        </Link>
-      </div>
-      <div className="navbar-end hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 hidden lg:flex">
           <li>
             <Link to="/" className="text-lg md:text-2xl">
               Home
