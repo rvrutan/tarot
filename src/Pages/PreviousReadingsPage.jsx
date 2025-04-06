@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import BasicReading from "../components/BasicReading";
 
 export default function PreviousReadingsPage() {
   const [savedReadings, setSavedReadings] = useState([]);
   const [selectedReading, setSelectedReading] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-  // Load saved readings from localStorage
   useEffect(() => {
     const storedReadings =
       JSON.parse(localStorage.getItem("savedReadings")) || [];
@@ -13,50 +14,64 @@ export default function PreviousReadingsPage() {
   }, []);
 
   const handleSelectReading = (key) => {
-    // Find the selected reading from saved readings
     const selected = savedReadings.find((reading) => reading.key === key);
     setSelectedReading(selected);
+    setIsOpen(false);
   };
 
   const handleRemoveReading = () => {
-    // Retrieve existing saved readings
-    const savedReadings =
-      JSON.parse(localStorage.getItem("savedReadings")) || [];
-    savedReadings.pop(selectedReading);
-
-    localStorage.setItem("savedReadings", JSON.stringify(savedReadings));
-
-    location.reload();
+    const updatedReadings = savedReadings.filter(
+      (reading) => reading.key !== selectedReading.key
+    );
+    localStorage.setItem("savedReadings", JSON.stringify(updatedReadings));
+    setSavedReadings(updatedReadings);
+    setSelectedReading(null);
   };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl text-center mb-6">Your Readings</h1>
-      {/* Display a dropdown of saved readings */}
       <div className="mb-4 text-center">
         {savedReadings.length === 0 ? (
           <p>No saved readings.</p>
         ) : savedReadings.length >= 1 ? (
-          <div className="form-control">
-            <label className="label"></label>
-            <select
-              className="select select-bordered w-full max-w-xs mx-auto"
-              onChange={(e) => handleSelectReading(e.target.value)}
-              defaultValue=""
+          <div className="relative w-64 mx-auto" ref={dropdownRef}>
+            <button
+              className="w-full rounded-md shadow-xl border py-2 px-4 text-left focus:outline-none focus:ring-2 "
+              onClick={() => setIsOpen(!isOpen)}
             >
-              <option value="" disabled>
-                Choose a Reading
-              </option>
-              {savedReadings.map((reading) => (
-                <option key={reading.key} value={reading.key}>
-                  {reading.key}
-                </option>
-              ))}
-            </select>
+              {selectedReading ? selectedReading.key : "Choose a Reading"}
+            </button>
+            {isOpen && (
+              <div className="absolute mt-1 w-full rounded-md ring-opacity-5 z-10">
+                <ul className="py-1">
+                  {savedReadings.map((reading) => (
+                    <li
+                      key={reading.key}
+                      className="px-2 py-1 border hover:bg-gray-700 rounded-2xl cursor-pointer"
+                      onClick={() => handleSelectReading(reading.key)}
+                    >
+                      {reading.key}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ) : null}
-      </div>{" "}
-      {/* Display the selected reading if any */}
+      </div>
       {selectedReading && (
         <div>
           <BasicReading
