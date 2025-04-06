@@ -80,7 +80,7 @@ export default function About() {
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-semibold">Saosyn</h3>
+                <h3 className="text-xl font-semibold">Timothy Ehli</h3>
                 <a 
                   href="https://github.com/Saosyn" 
                   target="_blank" 
