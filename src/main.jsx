@@ -6,6 +6,7 @@ import App from './App.jsx';
 import ViewAll from './Pages/ViewAll.jsx';
 import Homepage from './Pages/Homepage.jsx';
 import PreviousReadingsPage from './Pages/PreviousReadingsPage.jsx';
+import About from './Pages/About.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: 'view-prev-read',
         element: <PreviousReadingsPage />,
+      },
+      {
+        path: 'about',
+        element: <About />,
       }
     ]
   }

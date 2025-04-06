@@ -37,10 +37,15 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-            <Link to="view-prev-read" className="text-lg">
-              Your Readings
-            </Link>
-          </li>
+              <Link to="view-prev-read" className="text-lg">
+                Your Readings
+              </Link>
+            </li>
+            <li>
+              <Link to="about" className="text-lg">
+                About
+              </Link>
+            </li>
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost text-xl sm:text-3xl md:text-4xl">
@@ -62,6 +67,11 @@ export default function Navbar() {
           <li>
             <Link to="view-prev-read" className="text-lg md:text-2xl">
               Your Readings
+            </Link>
+          </li>
+          <li>
+            <Link to="about" className="text-lg md:text-2xl">
+              About
             </Link>
           </li>
         </ul>
