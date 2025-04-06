@@ -19,7 +19,7 @@ const Card = ({ card, isUpright }) => {
       : "";
 
   return (
-    <div className="sm:p-6 text-center rounded-lg flex flex-col items-center rotate-y-180">
+    <div className="sm:p-6 text-center rounded-lg flex flex-col items-center ">
       <img
         src={`${import.meta.env.BASE_URL}cards/${card.img}`}
         alt={card.name}

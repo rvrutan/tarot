@@ -10,17 +10,18 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [cardsVisible, setCardsVisible] = useState([false, false, false]);
   const [storeReading, setStoreReading] = useState([]);
-  const [saveButtonVisible, setSaveButtonVisible] = useState(true); // State for button visibility
+  const [saveButtonVisible, setSaveButtonVisible] = useState(true);
+  const [rotating, setRotating] = useState([false, false, false]);
+  const [showFront, setShowFront] = useState([false, false, false]);
 
-  const readingKey = cards.map((card) => card.name).join("-"); // Create a key from the card names
+  const readingKey = cards.map((card) => card.name).join("-");
 
   useEffect(() => {
     const savedReadings = JSON.parse(localStorage.getItem("savedReadings")) || [];
     const readingExists = savedReadings.some((savedReading) => savedReading.key === readingKey);
-    setSaveButtonVisible(!readingExists); // Hide button if reading exists
+    setSaveButtonVisible(!readingExists);
   }, [cards]);
 
-  // Add entrance animation for cards
   useEffect(() => {
     const timer = setTimeout(() => {
       setCardsVisible([true, false, false]);
@@ -30,33 +31,42 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
   }, []);
 
   const handleReveal = (index) => {
-    const newRevealed = [...revealed];
-    newRevealed[index] = true;
-    setRevealed(newRevealed);
+    const newRotating = [...rotating];
+    newRotating[index] = true;
+    setRotating(newRotating);
 
-    // Play chord after revealing a card
     if (cards[index].cardChord) {
       playChord(cards[index].cardChord);
     }
 
     setTimeout(() => {
+      const newShowFront = [...showFront];
+      newShowFront[index] = true;
+      setShowFront(newShowFront);
+    }, 500);
+
+    setTimeout(() => {
+      const newRevealed = [...revealed];
+      newRevealed[index] = true;
+      setRevealed(newRevealed);
+      setRotating(newRotating.map((_, i) => i === index ? false : _));
+
       if (currentCardIndex < cards.length - 1) {
         setCurrentCardIndex(currentCardIndex + 1);
-        // Show next card with a delay
         setTimeout(() => {
           const newVisible = [...cardsVisible];
           newVisible[currentCardIndex + 1] = true;
           setCardsVisible(newVisible);
         }, 500);
       }
-    }, 1500); // Increased delay between revealing each card
 
-    if (newRevealed.every((r) => r)) {
-      setTimeout(() => {
-        setAllRevealed(true);
-        if (onRevealComplete) onRevealComplete();
-      }, 1000); // Increased delay for text appearance
-    }
+      if (newRevealed.every((r) => r)) {
+        setTimeout(() => {
+          setAllRevealed(true);
+          if (onRevealComplete) onRevealComplete();
+        }, 1000);
+      }
+    }, 1000);
   };
 
   const playChord = (chord) => {
@@ -129,10 +139,10 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
           cards.map((card, index) => (
             <div
               key={index}
-              className={`flex-1 mx-2 cursor-pointer transition-all duration-1000 ${
+              className={`flex-1 mx-2 cursor-pointer transition-all duration-3000 ${
                 cardsVisible[index]
                   ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
+                  : "opacity-0 translate-y-75"
               }`}
               onClick={() => handleReveal(index)}
             >
@@ -140,13 +150,25 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
                 <h3 className="text-xl font-semibold">{positions[index]}</h3>
                 <div
                   className={`transition-all duration-1000 ${
-                    revealed[index] ? "rotate-y-180" : ""
+                    rotating[index] ? "rotate-y-112" : ""
                   }`}
+                  style={{
+                    transformStyle: "preserve-3d",
+                    perspective: "1000px",
+                  }}
                 >
-                  {revealed[index] ? (
-                    <Card card={card} isUpright={isUprights[index]} />
+                  {!showFront[index] ? (
+                    <div className="backface-hidden">
+                      <img 
+                        src={cardBackImage} 
+                        alt="Card Back" 
+                        className="w-32 sm:w-40 h-auto rounded-md mb-3 sm:mb-2 mt-0 sm:mt-6" 
+                      />
+                    </div>
                   ) : (
-                    <img src={cardBackImage} alt="Card Back" className="w-32 sm:w-40 h-auto rounded-md mb-3 sm:mb-2 mt-0 sm:mt-6" />
+                    <div className="backface-hidden">
+                      <Card card={card} isUpright={isUprights[index]} />
+                    </div>
                   )}
                 </div>
               </div>
@@ -155,25 +177,28 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
       </div>
       {allRevealed && (
         <div
-          className="p-4 opacity-0 transition-opacity duration-1000 ease-in  text-center text-lg"
-          style={{ opacity: allRevealed ? 1 : 0 }}
+          className="p-4 opacity-0 transform translate-y-4 transition-all duration-1000 ease-out text-center text-lg"
+          style={{ 
+            opacity: allRevealed ? 1 : 0,
+            transform: allRevealed ? 'translateY(0)' : 'translateY(4)'
+          }}
         >
           <h2 className="text-2xl font-semibold mb-1 text-center">
             Tarot Reading
           </h2>
-          <p>{reading}</p>
-               {/* Conditional "Save This Reading" button */}
-      {saveButtonVisible && (
-        <div className="text-center mt-4">
-          <button onClick={handleSaveReading} className="btn btn-xl">
-            Save This Reading
-          </button>
+          <p className="opacity-0 transition-opacity duration-1000 delay-500"
+             style={{ opacity: allRevealed ? 1 : 0 }}>
+            {reading}
+          </p>
+          {saveButtonVisible && (
+            <div className="text-center mt-4">
+              <button onClick={handleSaveReading} className="btn btn-xl mb-4">
+                Save This Reading
+              </button>
+            </div>
+          )}
         </div>
       )}
- </div>
-      )}
-
-
     </div>
   );
 };
