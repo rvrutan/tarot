@@ -204,7 +204,7 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingCo
              style={{ opacity: allRevealed ? 1 : 0 }}>
             <Typewriter 
               text={reading} 
-              speed={20} 
+              speed={5} 
               delay={500} 
               onComplete={handleTypingComplete}
             />
