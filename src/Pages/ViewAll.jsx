@@ -73,17 +73,6 @@ export default function ViewAll() {
         </div>
       </div>
 
-      <div className="flex justify-center mb-4">
-        <button
-          className="btn"
-          onClick={() => {
-            const randomIndex = Math.floor(Math.random() * sortedCards.length);
-            setSelectedCard(sortedCards[randomIndex]);
-          }}
-        >
-          Pull a Card{" "}
-        </button>
-      </div>
 
       {/* Card Grid */}
       <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4">
