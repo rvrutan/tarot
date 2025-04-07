@@ -153,7 +153,7 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingCo
           cards.map((card, index) => (
             <div
               key={index}
-              className={`flex-1 mx-2 cursor-pointer transition-all duration-3000 ${
+              className={`flex-1 mx-2 cursor-pointer transition-all duration-1000 ${
                 cardsVisible[index]
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-75"
@@ -204,7 +204,7 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingCo
              style={{ opacity: allRevealed ? 1 : 0 }}>
             <Typewriter 
               text={reading} 
-              speed={50} 
+              speed={20} 
               delay={500} 
               onComplete={handleTypingComplete}
             />
