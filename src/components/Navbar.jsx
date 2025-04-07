@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <div className="navbar bg-base-100 shadow-xl">
+    <div className="navbar bg-base-100 shadow-xl z-50 relative">
       <div className="navbar-start">
         <Link to="/" className="btn btn-ghost text-xl sm:text-3xl md:text-4xl">
           Tarot
