@@ -3,9 +3,14 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <div className="navbar bg-base-100 shadow-xl">
+    <div className="navbar bg-base-100 shadow-xl z-50 relative">
       <div className="navbar-start">
-        <div className="dropdown">
+        <Link to="/" className="btn btn-ghost text-xl sm:text-3xl md:text-4xl">
+          Tarot
+        </Link>
+      </div>
+      <div className="navbar-end">
+        <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -33,22 +38,22 @@ export default function Navbar() {
             </li>
             <li>
               <Link to="view-all-cards" className="text-lg">
-                View all cards
+                Explore Deck
               </Link>
             </li>
             <li>
-            <Link to="view-prev-read" className="text-lg">
-              View Previous Readings
-            </Link>
-          </li>
+              <Link to="view-prev-read" className="text-lg">
+                Your Readings
+              </Link>
+            </li>
+            <li>
+              <Link to="about" className="text-lg">
+                About
+              </Link>
+            </li>
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost text-xl sm:text-3xl md:text-4xl">
-          Tarot
-        </Link>
-      </div>
-      <div className="navbar-end hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 hidden lg:flex">
           <li>
             <Link to="/" className="text-lg md:text-2xl">
               Home
@@ -62,6 +67,11 @@ export default function Navbar() {
           <li>
             <Link to="view-prev-read" className="text-lg md:text-2xl">
               Your Readings
+            </Link>
+          </li>
+          <li>
+            <Link to="about" className="text-lg md:text-2xl">
+              About
             </Link>
           </li>
         </ul>

@@ -9,13 +9,16 @@ export default function Homepage() {
   const [shrinkLogo, setShrinkLogo] = useState(false);
   const [showNewReadingButton, setShowNewReadingButton] = useState(false);
   const [buttonFadeOut, setButtonFadeOut] = useState(false);
-  
+  const [typingComplete, setTypingComplete] = useState(false);
+  const [buttonsVisible, setButtonsVisible] = useState(false);
 
   const handleNewReading = async () => {
     // Start fade out animations
     setButtonFadeOut(true);
     setInfoFadeOut(true);
-    
+    setTypingComplete(false);
+    setButtonsVisible(false);
+
     // Wait for fade out animations to complete
     setTimeout(async () => {
       setShrinkLogo(true);
@@ -45,7 +48,15 @@ export default function Homepage() {
   const handleRevealComplete = () => {
     setButtonFadeOut(false);
     setInfoFadeOut(false);
+  };
+
+  const handleTypingComplete = () => {
+    setTypingComplete(true);
     setShowNewReadingButton(true);
+    // Add a small delay before showing buttons to ensure smooth animation
+    setTimeout(() => {
+      setButtonsVisible(true);
+    }, 100);
   };
 
   return (
@@ -73,26 +84,27 @@ export default function Homepage() {
               <div className="container mx-auto">
                 {showInfo && (
                   <h1
-                    className={`text-center mb-4 max-w-lg mx-auto transition-opacity duration-500 ${
+                    className={`text-center text-lg mb-4 max-w-lg mx-auto transition-opacity duration-500 mt-4 ${
                       infoFadeOut ? "opacity-0" : "opacity-100"
                     }`}
                   >
-                   Tarot is an ancient practice of divination that dates back
+                    Tarot is an ancient practice of divination that dates back
                     centuries, utilizing a deck of 78 beautifully illustrated
                     cards to provide insight into your life's journey. Tarot
                     readings can help you explore your past, understand your
                     present circumstances, and glimpse potential paths for your
                     future. Click the button below to get your personalized
-                    reading and uncover what the cards have in store for you!                  </h1>
+                    reading and uncover what the cards have in store for you!{" "}
+                  </h1>
                 )}
               </div>
             </div>
 
             {!readingData && (
-              <button 
-                onClick={handleNewReading} 
-                className={`btn btn-xl transition-opacity duration-500 ${
-                  buttonFadeOut ? 'opacity-0' : 'opacity-100'
+              <button
+                onClick={handleNewReading}
+                className={`btn btn-xl transition-all duration-500 ${
+                  buttonFadeOut ? "opacity-0" : "opacity-100"
                 }`}
               >
                 New Reading
@@ -106,18 +118,21 @@ export default function Homepage() {
               reading={readingData.reading}
               isUprights={readingData.isUprights}
               onRevealComplete={handleRevealComplete}
+              onTypingComplete={handleTypingComplete}
             />
           ) : (
             <p className="text-center text-xs "></p>
           )}
 
-          {showNewReadingButton && (
-            <div className="text-center">
-              <button 
-                onClick={handleNewReading} 
-                className={`btn btn-xl transition-opacity duration-500 ${
-                  buttonFadeOut ? 'opacity-0' : 'opacity-100'
-                }`}
+          {showNewReadingButton && typingComplete && (
+            <div className={`text-center transition-all duration-700 ease-out ${
+              buttonsVisible 
+                ? "opacity-100 translate-y-0" 
+                : "opacity-0 translate-y-8"
+            }`}>
+              <button
+                onClick={handleNewReading}
+                className="btn btn-xl"
               >
                 New Reading
               </button>

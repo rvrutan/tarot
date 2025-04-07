@@ -2,3 +2,7 @@
 @plugin "daisyui" {
   themes: all;
 }
+
+.modal-header {
+  text-decoration: underline;
+}
