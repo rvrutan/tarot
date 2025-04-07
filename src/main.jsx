@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
 import ViewAll from './Pages/ViewAll.jsx';
-import Homepage from './Pages/Homepage.jsx';
+import Homepage from './Pages/HomePage.jsx';
 import PreviousReadingsPage from './Pages/PreviousReadingsPage.jsx';
 import About from './Pages/About.jsx';
 
