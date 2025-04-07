@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
+import Typewriter from "./Typewriter";
 import cardBackImage from "/public/cards/aa2-tarot-card-back-removebg-preview.png";
 import * as Tone from "tone";
 
-const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
+const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingComplete }) => {
   const positions = ["Past", "Present", "Future"];
   const [revealed, setRevealed] = useState([false, false, false]);
   const [allRevealed, setAllRevealed] = useState(false);
@@ -13,6 +14,8 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
   const [saveButtonVisible, setSaveButtonVisible] = useState(true);
   const [rotating, setRotating] = useState([false, false, false]);
   const [showFront, setShowFront] = useState([false, false, false]);
+  const [typingComplete, setTypingComplete] = useState(false);
+  const [buttonsVisible, setButtonsVisible] = useState(false);
 
   const readingKey = cards.map((card) => card.name).join("-");
 
@@ -132,6 +135,17 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
     setSaveButtonVisible(false);
   };
 
+  const handleTypingComplete = () => {
+    setTypingComplete(true);
+    // Add a small delay before showing buttons to ensure smooth animation
+    setTimeout(() => {
+      setButtonsVisible(true);
+    }, 500);
+    if (onTypingComplete) {
+      onTypingComplete();
+    }
+  };
+
   return (
     <div>
       <div className="flex justify-around items-stretch mt-10">
@@ -188,10 +202,19 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
           </h2>
           <p className="opacity-0 transition-opacity duration-1000 delay-500"
              style={{ opacity: allRevealed ? 1 : 0 }}>
-            {reading}
+            <Typewriter 
+              text={reading} 
+              speed={50} 
+              delay={500} 
+              onComplete={handleTypingComplete}
+            />
           </p>
-          {saveButtonVisible && (
-            <div className="text-center mt-4">
+          {saveButtonVisible && typingComplete && (
+            <div className={`text-center mt-4 transition-all duration-700 ease-out ${
+              buttonsVisible 
+                ? "opacity-100 translate-y-0" 
+                : "opacity-0 translate-y-8"
+            }`}>
               <button onClick={handleSaveReading} className="btn btn-xl mb-4">
                 Save This Reading
               </button>

@@ -9,11 +9,15 @@ export default function Homepage() {
   const [shrinkLogo, setShrinkLogo] = useState(false);
   const [showNewReadingButton, setShowNewReadingButton] = useState(false);
   const [buttonFadeOut, setButtonFadeOut] = useState(false);
+  const [typingComplete, setTypingComplete] = useState(false);
+  const [buttonsVisible, setButtonsVisible] = useState(false);
 
   const handleNewReading = async () => {
     // Start fade out animations
     setButtonFadeOut(true);
     setInfoFadeOut(true);
+    setTypingComplete(false);
+    setButtonsVisible(false);
 
     // Wait for fade out animations to complete
     setTimeout(async () => {
@@ -44,7 +48,15 @@ export default function Homepage() {
   const handleRevealComplete = () => {
     setButtonFadeOut(false);
     setInfoFadeOut(false);
+  };
+
+  const handleTypingComplete = () => {
+    setTypingComplete(true);
     setShowNewReadingButton(true);
+    // Add a small delay before showing buttons to ensure smooth animation
+    setTimeout(() => {
+      setButtonsVisible(true);
+    }, 100);
   };
 
   return (
@@ -91,7 +103,7 @@ export default function Homepage() {
             {!readingData && (
               <button
                 onClick={handleNewReading}
-                className={`btn btn-xl transition-opacity duration-500 ${
+                className={`btn btn-xl transition-all duration-500 ${
                   buttonFadeOut ? "opacity-0" : "opacity-100"
                 }`}
               >
@@ -106,18 +118,21 @@ export default function Homepage() {
               reading={readingData.reading}
               isUprights={readingData.isUprights}
               onRevealComplete={handleRevealComplete}
+              onTypingComplete={handleTypingComplete}
             />
           ) : (
             <p className="text-center text-xs "></p>
           )}
 
-          {showNewReadingButton && (
-            <div className="text-center">
+          {showNewReadingButton && typingComplete && (
+            <div className={`text-center transition-all duration-700 ease-out ${
+              buttonsVisible 
+                ? "opacity-100 translate-y-0" 
+                : "opacity-0 translate-y-8"
+            }`}>
               <button
                 onClick={handleNewReading}
-                className={`btn btn-xl transition-opacity duration-500 ${
-                  buttonFadeOut ? "opacity-0" : "opacity-100"
-                }`}
+                className="btn btn-xl"
               >
                 New Reading
               </button>
