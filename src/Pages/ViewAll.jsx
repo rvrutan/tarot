@@ -4,7 +4,7 @@ import SmallCard from "../components/SmallCard";
 export default function ViewAll() {
   const [readingData, setReadingData] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [sortType, setSortType] = useState("number"); // Default sorting type
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1); // State to track the active page in the modal
 
   useEffect(() => {
@@ -27,27 +27,17 @@ export default function ViewAll() {
     return <div>Loading...</div>;
   }
 
-  // Sorting logic
-  const sortedCards = [...readingData.cards].sort((a, b) => {
-    if (sortType === "number") {
-      // Major Arcana first
-      if (a.arcana === "Major Arcana" && b.arcana !== "Major Arcana") {
-        return -1;
-      }
-      if (a.arcana !== "Major Arcana" && b.arcana === "Major Arcana") {
-        return 1;
-      }
-      // If both are Major or both are Minor, sort by number
-      return parseInt(a.number) - parseInt(b.number);
-    }
-    if (sortType === "suit") {
-      return a.suit.localeCompare(b.suit);
-    }
-    if (sortType === "arcana") {
-      return a.arcana.localeCompare(b.arcana);
-    }
-    return 0;
+  const filteredCards = readingData.cards.filter((card) => {
+    const lowerCaseName = card.name.toLowerCase();
+    const lowerCaseSearch = searchTerm.toLowerCase();
+
+    return (
+      lowerCaseName.includes(lowerCaseSearch) ||
+      (card.suit && card.suit.toLowerCase().includes(lowerCaseSearch)) ||
+      card.number === searchTerm
+    );
   });
+
 
   const handlePageChange = (page) => {
     setCurrentPage(page); // Change to the selected page in the modal
@@ -55,27 +45,25 @@ export default function ViewAll() {
 
   return (
     <div className="container mx-auto px-2 sm:px-4 py-6">
-      {/* Sorting Controls */}
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold mb-4 sm:mb-0">
-          All Tarot Cards
-        </h1>
-        <div className="form-control w-full sm:w-auto">
-          <select
-            className="select select-bordered w-full sm:w-48"
-            value={sortType}
-            onChange={(e) => setSortType(e.target.value)}
-          >
-            <option value="number">Number</option>
-            <option value="suit">Suit</option>
-            <option value="arcana">Arcana</option>
-          </select>
-        </div>
+    {/* Search Controls */}
+    <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
+      <h1 className="text-2xl md:text-3xl font-bold mb-4 sm:mb-0">
+        All Tarot Cards
+      </h1>
+      <div className="form-control w-full sm:w-96">
+        <input
+          type="text"
+          placeholder="Search cards by name, number, or suit..."
+          className="input input-bordered w-full"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
+    </div>
 
       {/* Card Grid */}
       <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4">
-        {sortedCards.map((card, index) => (
+        {filteredCards.map((card, index) => (
           <div
             key={index}
             onClick={() => setSelectedCard(card)}

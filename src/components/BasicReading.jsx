@@ -9,7 +9,6 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete }) => {
   const [allRevealed, setAllRevealed] = useState(false);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [cardsVisible, setCardsVisible] = useState([false, false, false]);
-  const [storeReading, setStoreReading] = useState([]);
   const [saveButtonVisible, setSaveButtonVisible] = useState(true); // State for button visibility
 
   const readingKey = cards.map((card) => card.name).join("-"); // Create a key from the card names
