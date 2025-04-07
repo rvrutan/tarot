@@ -56,7 +56,7 @@ export default function ViewAll() {
   return (
     <div className="container mx-auto px-2 sm:px-4 py-6">
       {/* Sorting Controls */}
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
         <h1 className="text-2xl md:text-3xl font-bold mb-4 sm:mb-0">
           All Tarot Cards
         </h1>
@@ -71,6 +71,18 @@ export default function ViewAll() {
             <option value="arcana">Arcana</option>
           </select>
         </div>
+      </div>
+
+      <div className="flex justify-center mb-4">
+        <button
+          className="btn"
+          onClick={() => {
+            const randomIndex = Math.floor(Math.random() * sortedCards.length);
+            setSelectedCard(sortedCards[randomIndex]);
+          }}
+        >
+          Pull a Card{" "}
+        </button>
       </div>
 
       {/* Card Grid */}
@@ -90,12 +102,19 @@ export default function ViewAll() {
       {selectedCard && (
         <dialog id="modal" className="modal modal-open">
           <div className="modal-box">
-            <h2 className="text-2xl text-center font-bold mb-2">
+            <h2 className="text-2xl text-center font-bold mb-1">
               {selectedCard.name}
             </h2>
+            <div className="flex justify-center mb-1">
+              <img
+                src={`${import.meta.env.BASE_URL}cards/${selectedCard.img}`}
+                alt={selectedCard.name}
+                className="w-32 sm:w-40 h-auto rounded-md"
+              />
+            </div>
 
             {/* Tabs for page navigation */}
-            <div className="tabs tabs-boxed mb-4">
+            <div className="tabs tabs-boxed justify-center">
               <a
                 className={`tab ${currentPage === 1 ? "tab-active" : ""}`}
                 onClick={() => handlePageChange(1)}
@@ -137,13 +156,17 @@ export default function ViewAll() {
 
             {currentPage === 2 && (
               <div>
-                <p className="text-center modal-header">Upright Interpretations</p>
+                <p className="text-center modal-header">
+                  Upright Interpretations
+                </p>
                 {selectedCard.meanings.light.map((meaning, index) => (
                   <div key={index}>
                     <li>{meaning}</li>
                   </div>
                 ))}
-                <p className="text-center modal-header">Reversed Interpretations</p>
+                <p className="text-center modal-header">
+                  Reversed Interpretations
+                </p>
                 {selectedCard.meanings.shadow.map((meaning, index) => (
                   <div key={index}>
                     <li>{meaning}</li>
@@ -157,7 +180,9 @@ export default function ViewAll() {
                 {/* Conditionally render Mythical/Spiritual if it exists */}
                 {selectedCard.Spiritual && (
                   <>
-                    <p className="text-center modal-header">Mythical/Spiritual</p>
+                    <p className="text-center modal-header">
+                      Mythical/Spiritual
+                    </p>
                     <p>{selectedCard.Spiritual}</p>
                   </>
                 )}
