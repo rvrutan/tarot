@@ -101,7 +101,7 @@ export default function ViewAll() {
       {/* Modal */}
       {selectedCard && (
         <dialog id="modal" className="modal modal-open">
-          <div className="modal-box max-h-[90vh] overflow-y-auto">
+          <div className="modal-box max-h-[90vh] overflow-y-auto z-50 relative">
             <h2 className="text-2xl text-center font-bold mb-1">
               {selectedCard.name}
             </h2>
