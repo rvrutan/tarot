@@ -7,8 +7,8 @@ const Typewriter = ({ text, speed = 30, delay = 0, onComplete }) => {
   useEffect(() => {
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
-        setDisplayedText(prev => prev + text[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
+        setDisplayedText((prev) => prev + text[currentIndex]);
+        setCurrentIndex((prev) => prev + 1);
       }, speed);
 
       return () => clearTimeout(timeout);
@@ -17,7 +17,7 @@ const Typewriter = ({ text, speed = 30, delay = 0, onComplete }) => {
     }
   }, [currentIndex, text, speed, onComplete]);
 
-  return <span>{displayedText}</span>;
+  return <div className="text-left">{displayedText}</div>;
 };
 
-export default Typewriter; 
+export default Typewriter;

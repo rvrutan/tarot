@@ -1,27 +1,36 @@
-import React, { useState, useEffect } from "react";
-import Card from "./Card";
-import Typewriter from "./Typewriter";
-import cardBackImage from "/public/cards/aa2-tarot-card-back-removebg-preview.png";
-import * as Tone from "tone";
+import React, { useState, useEffect } from 'react';
+import Card from './Card';
+import Typewriter from './Typewriter';
+import cardBackImage from '/public/cards/aa2-tarot-card-back-removebg-preview.png';
+import * as Tone from 'tone';
 
-const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingComplete }) => {
-  const positions = ["Past", "Present", "Future"];
+const BasicReading = ({
+  cards,
+  reading,
+  isUprights,
+  onRevealComplete,
+  onTypingComplete,
+}) => {
+  const positions = ['Past', 'Present', 'Future'];
   const [revealed, setRevealed] = useState([false, false, false]);
   const [allRevealed, setAllRevealed] = useState(false);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [cardsVisible, setCardsVisible] = useState([false, false, false]);
-  const [storeReading, setStoreReading] = useState([]);
+  // const [storeReading, setStoreReading] = useState([]);
   const [saveButtonVisible, setSaveButtonVisible] = useState(true);
   const [rotating, setRotating] = useState([false, false, false]);
   const [showFront, setShowFront] = useState([false, false, false]);
   const [typingComplete, setTypingComplete] = useState(false);
   const [buttonsVisible, setButtonsVisible] = useState(false);
 
-  const readingKey = cards.map((card) => card.name).join("-");
+  const readingKey = cards.map((card) => card.name).join('-');
 
   useEffect(() => {
-    const savedReadings = JSON.parse(localStorage.getItem("savedReadings")) || [];
-    const readingExists = savedReadings.some((savedReading) => savedReading.key === readingKey);
+    const savedReadings =
+      JSON.parse(localStorage.getItem('savedReadings')) || [];
+    const readingExists = savedReadings.some(
+      (savedReading) => savedReading.key === readingKey
+    );
     setSaveButtonVisible(!readingExists);
   }, [cards]);
 
@@ -52,7 +61,7 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingCo
       const newRevealed = [...revealed];
       newRevealed[index] = true;
       setRevealed(newRevealed);
-      setRotating(newRotating.map((_, i) => i === index ? false : _));
+      setRotating(newRotating.map((_, i) => (i === index ? false : _)));
 
       if (currentCardIndex < cards.length - 1) {
         setCurrentCardIndex(currentCardIndex + 1);
@@ -73,23 +82,23 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingCo
   };
 
   const playChord = (chord) => {
-    const notes = chord.map((note) => Tone.Frequency(note, "midi").toNote());
-  
+    const notes = chord.map((note) => Tone.Frequency(note, 'midi').toNote());
+
     const reverb = new Tone.Reverb({
       decay: 6,
       preDelay: 0.01,
       wet: 0.6,
     }).toDestination();
-  
+
     reverb.generate();
-  
+
     const chorus = new Tone.Chorus(4, 2.5, 0.3).start();
     chorus.wet.value = 0.5;
-  
-    const filter = new Tone.Filter(1000, "lowpass"); // roll off the high end, less harsh
-  
+
+    const filter = new Tone.Filter(1000, 'lowpass'); // roll off the high end, less harsh
+
     const synth = new Tone.PolySynth(Tone.Synth, {
-      oscillator: { type: "triangle" }, //can swap in sine, square, sawtooth, or triangle
+      oscillator: { type: 'sawtooth' }, //can swap in sine, square, sawtooth, or triangle
       envelope: {
         attack: 1,
         decay: 0.5,
@@ -98,15 +107,15 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingCo
       },
       volume: -24,
     }).chain(chorus, filter, reverb);
-  
+
     // Start the chord
     synth.triggerAttack(notes);
-  
+
     // Let it ring, then release
     setTimeout(() => {
       synth.triggerRelease(notes); // begins the fade-out
     }, 2000); // sustain for 3 seconds
-  
+
     // Dispose everything a bit after release finishes
     setTimeout(() => {
       synth.dispose();
@@ -115,7 +124,7 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingCo
       reverb.dispose();
     }, 5000); // give time for release to finish
   };
-  
+
   const handleSaveReading = () => {
     const newReading = {
       key: readingKey, // Use the key made from the card names
@@ -125,11 +134,12 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingCo
     };
 
     // Retrieve existing saved readings
-    const savedReadings = JSON.parse(localStorage.getItem("savedReadings")) || [];
+    const savedReadings =
+      JSON.parse(localStorage.getItem('savedReadings')) || [];
     savedReadings.push(newReading);
 
     // Save updated readings to localStorage
-    localStorage.setItem("savedReadings", JSON.stringify(savedReadings));
+    localStorage.setItem('savedReadings', JSON.stringify(savedReadings));
 
     // Hide the save button after saving
     setSaveButtonVisible(false);
@@ -155,8 +165,8 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingCo
               key={index}
               className={`flex-1 mx-2 cursor-pointer transition-all duration-1000 ${
                 cardsVisible[index]
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-75"
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-75'
               }`}
               onClick={() => handleReveal(index)}
             >
@@ -164,19 +174,19 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingCo
                 <h3 className="text-xl font-semibold">{positions[index]}</h3>
                 <div
                   className={`transition-all duration-1000 ${
-                    rotating[index] ? "rotate-y-112" : ""
+                    rotating[index] ? 'rotate-y-112' : ''
                   }`}
                   style={{
-                    transformStyle: "preserve-3d",
-                    perspective: "1000px",
+                    transformStyle: 'preserve-3d',
+                    perspective: '1000px',
                   }}
                 >
                   {!showFront[index] ? (
                     <div className="backface-hidden">
-                      <img 
-                        src={cardBackImage} 
-                        alt="Card Back" 
-                        className="w-32 sm:w-40 h-auto rounded-md mb-3 sm:mb-2 mt-0 sm:mt-6" 
+                      <img
+                        src={cardBackImage}
+                        alt="Card Back"
+                        className="w-32 sm:w-40 h-auto rounded-md mb-3 sm:mb-2 mt-0 sm:mt-6"
                       />
                     </div>
                   ) : (
@@ -192,29 +202,33 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingCo
       {allRevealed && (
         <div
           className="p-4 opacity-0 transform translate-y-4 transition-all duration-1000 ease-out text-center text-lg"
-          style={{ 
+          style={{
             opacity: allRevealed ? 1 : 0,
-            transform: allRevealed ? 'translateY(0)' : 'translateY(4)'
+            transform: allRevealed ? 'translateY(0)' : 'translateY(4)',
           }}
         >
           <h2 className="text-2xl font-semibold mb-1 text-center">
             Tarot Reading
           </h2>
-          <p className="opacity-0 transition-opacity duration-1000 delay-500"
-             style={{ opacity: allRevealed ? 1 : 0 }}>
-            <Typewriter 
-              text={reading} 
-              speed={5} 
-              delay={500} 
+          <p
+            className="opacity-0 transition-opacity duration-1000 delay-500"
+            style={{ opacity: allRevealed ? 1 : 0 }}
+          >
+            <Typewriter
+              text={reading}
+              speed={10}
+              delay={500}
               onComplete={handleTypingComplete}
             />
           </p>
           {saveButtonVisible && typingComplete && (
-            <div className={`text-center mt-4 transition-all duration-700 ease-out ${
-              buttonsVisible 
-                ? "opacity-100 translate-y-0" 
-                : "opacity-0 translate-y-8"
-            }`}>
+            <div
+              className={`text-center mt-4 transition-all duration-700 ease-out ${
+                buttonsVisible
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-8'
+              }`}
+            >
               <button onClick={handleSaveReading} className="btn btn-xl mb-4">
                 Save This Reading
               </button>
