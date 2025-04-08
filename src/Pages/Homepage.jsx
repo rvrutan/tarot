@@ -88,13 +88,17 @@ export default function Homepage() {
                       infoFadeOut ? "opacity-0" : "opacity-100"
                     }`}
                   >
-                    Tarot is an ancient practice of divination that dates back
-                    centuries, utilizing a deck of 78 beautifully illustrated
-                    cards to provide insight into your life's journey. Tarot
-                    readings can help you explore your past, understand your
-                    present circumstances, and glimpse potential paths for your
-                    future. Click the button below to get your personalized
-                    reading and uncover what the cards have in store for you!{" "}
+                    Embark on a journey through the mystical world of Tarot, a
+                    practice with roots tracing back to 15th-century Italy.
+                    Initially used for games, the beautifully illustrated
+                    78-card deck evolved into a powerful tool for divination,
+                    offering profound insights into life's complexities. At
+                    ForTune, we honor this rich history while embracing modern
+                    trends and technology. Experience the ancient wisdom of the
+                    Tarot as each card reveals its meaning, accompanied by a
+                    musical chords associated with each card. Explore your past,
+                    understand your present, and glimpse potential futures with
+                    our personalized readings.{" "}
                   </h1>
                 )}
               </div>
@@ -125,15 +129,14 @@ export default function Homepage() {
           )}
 
           {showNewReadingButton && typingComplete && (
-            <div className={`text-center transition-all duration-700 ease-out ${
-              buttonsVisible 
-                ? "opacity-100 translate-y-0" 
-                : "opacity-0 translate-y-8"
-            }`}>
-              <button
-                onClick={handleNewReading}
-                className="btn btn-xl"
-              >
+            <div
+              className={`text-center transition-all duration-700 ease-out ${
+                buttonsVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
+            >
+              <button onClick={handleNewReading} className="btn btn-xl">
                 New Reading
               </button>
             </div>

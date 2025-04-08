@@ -5,4 +5,10 @@
 
 .modal-header {
   text-decoration: underline;
+  margin-top: 6px;
+  font-size: 1.4rem;
+}
+
+#modal a {
+  font-size: 1rem;
 }

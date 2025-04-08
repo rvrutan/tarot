@@ -9,7 +9,7 @@ export default function About() {
         <div className="bg-base-200 p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold mb-4">Project Overview</h2>
           <p className="text-lg mb-4">
-            This Tarot reading application was created as a collaborative project by a team of developers passionate about creating meaningful digital experiences. The application combines traditional tarot wisdom with modern web technologies to provide users with insightful readings.
+            ForTune was created as a collaborative project by a team of developers passionate about creating meaningful digital experiences. The application combines traditional tarot wisdom with modern web technologies to provide users with insightful readings.
           </p>
         </div>
 

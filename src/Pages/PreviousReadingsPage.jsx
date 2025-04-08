@@ -5,6 +5,7 @@ export default function PreviousReadingsPage() {
   const [savedReadings, setSavedReadings] = useState([]);
   const [selectedReading, setSelectedReading] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -16,6 +17,7 @@ export default function PreviousReadingsPage() {
   const handleSelectReading = (key) => {
     const selected = savedReadings.find((reading) => reading.key === key);
     setSelectedReading(selected);
+    setIsRevealed(false);
     setIsOpen(false);
   };
 
@@ -60,7 +62,7 @@ export default function PreviousReadingsPage() {
                   {savedReadings.map((reading) => (
                     <li
                       key={reading.key}
-                      className="px-2 py-1 border bg-gray-800 md:bg-transparent hover:bg-gray-700 md:hover:bg-transparent rounded-2xl cursor-pointer"
+                      className="px-2 py-1 border bg-base-100  hover:bg-gray-700 md:hover:bg-transparent rounded-md cursor-pointer"
                       onClick={() => handleSelectReading(reading.key)}
                     >
                       {reading.key}
@@ -78,13 +80,15 @@ export default function PreviousReadingsPage() {
             cards={selectedReading.cards}
             reading={selectedReading.reading}
             isUprights={selectedReading.isUprights}
-            onRevealComplete={() => {}}
+            onRevealComplete={() => setIsRevealed(true)}
           />
-          <div className="text-center mt-4">
-            <button onClick={handleRemoveReading} className="btn btn-xl">
-              Remove Reading
-            </button>
-          </div>
+          {isRevealed && (
+            <div className="text-center mt-4">
+              <button onClick={handleRemoveReading} className="btn btn-xl">
+                Remove Reading
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

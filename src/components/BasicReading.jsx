@@ -89,7 +89,7 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingCo
     const filter = new Tone.Filter(1000, "lowpass"); // roll off the high end, less harsh
   
     const synth = new Tone.PolySynth(Tone.Synth, {
-      oscillator: { type: "triangle" }, //can swap in sine, square, sawtooth, or triangle
+      oscillator: { type: "sawtooth" }, //can swap in sine, square, sawtooth, or triangle
       envelope: {
         attack: 1,
         decay: 0.5,
@@ -191,20 +191,20 @@ const BasicReading = ({ cards, reading, isUprights, onRevealComplete, onTypingCo
       </div>
       {allRevealed && (
         <div
-          className="p-4 opacity-0 transform translate-y-4 transition-all duration-1000 ease-out text-center text-lg"
+          className="p-4 opacity-0 transform translate-y-4 transition-all duration-1000 ease-out text-left text-lg"
           style={{ 
             opacity: allRevealed ? 1 : 0,
             transform: allRevealed ? 'translateY(0)' : 'translateY(4)'
           }}
         >
           <h2 className="text-2xl font-semibold mb-1 text-center">
-            Tarot Reading
+            Your Reading
           </h2>
           <p className="opacity-0 transition-opacity duration-1000 delay-500"
              style={{ opacity: allRevealed ? 1 : 0 }}>
             <Typewriter 
               text={reading} 
-              speed={5} 
+              speed={20} 
               delay={500} 
               onComplete={handleTypingComplete}
             />

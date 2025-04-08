@@ -6,7 +6,7 @@ export default function Navbar() {
     <div className="navbar bg-base-100 shadow-xl z-50 relative">
       <div className="navbar-start">
         <Link to="/" className="btn btn-ghost text-xl sm:text-3xl md:text-4xl">
-          Tarot
+          ForTune
         </Link>
       </div>
       <div className="navbar-end">
@@ -55,22 +55,22 @@ export default function Navbar() {
         </div>
         <ul className="menu menu-horizontal px-1 hidden lg:flex">
           <li>
-            <Link to="/" className="text-lg md:text-2xl">
+            <Link to="/" className="text-lg md:text-xl">
               Home
             </Link>
           </li>
           <li>
-            <Link to="view-all-cards" className="text-lg md:text-2xl">
+            <Link to="view-all-cards" className="text-lg md:text-xl">
               Explore Deck
             </Link>
           </li>
           <li>
-            <Link to="view-prev-read" className="text-lg md:text-2xl">
+            <Link to="view-prev-read" className="text-lg md:text-xl">
               Your Readings
             </Link>
           </li>
           <li>
-            <Link to="about" className="text-lg md:text-2xl">
+            <Link to="about" className="text-lg md:text-xl">
               About
             </Link>
           </li>
