@@ -76,35 +76,40 @@ export default function ViewAll() {
       {/* Modal */}
       {selectedCard && (
         <dialog id="modal" className="modal modal-open">
-          <div className="modal-box max-h-[90vh] overflow-y-auto z-50 relative">
-            <h2 className="text-3xl text-center font-bold mb-2">
+          <div className="modal-box max-h-[90vh] overflow-y-auto z-50 relative bg-base-200 p-8 rounded-lg shadow-xl">
+            <h2 className="text-3xl text-center font-bold mb-4">
               {selectedCard.name}
             </h2>
-            <div className="flex justify-center mb-1">
+            <div className="flex justify-center mb-6">
               <img
                 src={`${import.meta.env.BASE_URL}cards/${selectedCard.img}`}
                 alt={selectedCard.name}
-                className="w-26 sm:w-32 h-auto rounded-md"
+                className="w-32 sm:w-40 h-auto rounded-lg border border-gray-200 shadow-sm"
               />
             </div>
 
             {/* Tabs for page navigation */}
-            <div className="tabs tabs-boxed justify-center l">
+            <div className="tabs tabs-boxed justify-center mb-4">
               <a
-                className={`tab ${currentPage === 1 ? "tab-active" : ""}`}
+                className={`tab cursor-pointer ${
+                  currentPage === 1 ? "tab-active" : ""
+                }`}
                 onClick={() => handlePageChange(1)}
               >
                 Fortune Telling / Keywords
               </a>
               <a
-                className={`tab ${currentPage === 2 ? "tab-active" : ""}`}
+                className={`tab cursor-pointer ${
+                  currentPage === 2 ? "tab-active" : ""
+                }`}
                 onClick={() => handlePageChange(2)}
               >
                 Interpretations
               </a>
-
               <a
-                className={`tab ${currentPage === 3 ? "tab-active" : ""}`}
+                className={`tab cursor-pointer ${
+                  currentPage === 3 ? "tab-active" : ""
+                }`}
                 onClick={() => handlePageChange(3)}
               >
                 More...
@@ -113,77 +118,108 @@ export default function ViewAll() {
 
             {/* Conditional Rendering of Pages */}
             {currentPage === 1 && (
-              <div className="">
-                <p className="text-center modal-header">Fortune Telling</p>
-                {selectedCard.fortune_telling.map((fortune, index) => (
-                  <div key={index}>
-                    <li>{fortune}</li>
-                  </div>
-                ))}
-                <p className="text-center modal-header">Keywords</p>
-                {selectedCard.keywords.map((keywords, index) => (
-                  <div key={index}>
-                    <li className="capitalize">{keywords}</li>
-                  </div>
-                ))}
+              <div className="space-y-4">
+                {/* Fortune Telling Section */}
+                <div>
+                  <p className="text-left text-lg font-semibold">
+                    Fortune Telling
+                  </p>
+                  <hr className="w-full bg-base-100 opacity-70 my-1" />
+                  <ul className="list-disc list-inside">
+                    {selectedCard.fortune_telling.map((fortune, index) => (
+                      <li key={index}>{fortune}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Keywords Section */}
+                <div className="mt-4">
+                  <p className="text-left text-lg font-semibold">Keywords</p>
+                  <hr className="w-full bg-base-100 opacity-70 my-1" />
+                  <ul className="list-disc list-inside">
+                    {selectedCard.keywords.map((keyword, index) => (
+                      <li key={index} className="capitalize">
+                        {keyword}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             )}
 
             {currentPage === 2 && (
-              <div>
-                <p className="text-center modal-header">
-                  Upright Interpretations
-                </p>
-                {selectedCard.meanings.light.map((meaning, index) => (
-                  <div key={index}>
-                    <li>{meaning}</li>
-                  </div>
-                ))}
-                <p className="text-center modal-header">
-                  Reversed Interpretations
-                </p>
-                {selectedCard.meanings.shadow.map((meaning, index) => (
-                  <div key={index}>
-                    <li>{meaning}</li>
-                  </div>
-                ))}
+              <div className="space-y-4">
+                {/* Upright Interpretations Section */}
+                <div>
+                  <p className="text-left text-lg font-semibold">
+                    Upright Interpretations
+                  </p>
+                  <hr className="w-full bg-base-100 opacity-70 my-1" />
+                  <ul className="list-disc list-inside">
+                    {selectedCard.meanings.light.map((meaning, index) => (
+                      <li key={index}>{meaning}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Reversed Interpretations Section */}
+                <div className="mt-4">
+                  <p className="text-left text-lg font-semibold">
+                    Reversed Interpretations
+                  </p>
+                  <hr className="w-full bg-base-100 opacity-70 my-1" />
+                  <ul className="list-disc list-inside">
+                    {selectedCard.meanings.shadow.map((meaning, index) => (
+                      <li key={index}>{meaning}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             )}
 
             {currentPage === 3 && (
-              <div>
-                {/* Conditionally render Mythical/Spiritual if it exists */}
+              <div className="space-y-4">
+                {/* Mythical / Spiritual Section */}
                 {selectedCard.Spiritual && (
-                  <>
-                    <p className="text-center modal-header">
+                  <div>
+                    <p className="text-left text-lg font-semibold">
                       Mythical / Spiritual
                     </p>
+                    <hr className="w-full bg-base-100 opacity-70 my-1" />
                     <p>{selectedCard.Spiritual}</p>
-                  </>
-                )}
-
-                {/* Conditionally render Affirmation if it exists */}
-                {selectedCard.Affirmation && (
-                  <>
-                    <p className="text-center modal-header">Affirmation</p>
-                    <p>{selectedCard.Affirmation}</p>
-                  </>
-                )}
-
-                {/* Always render Questions to Ask since it exists on every card */}
-                <p className="text-center modal-header">Questions to Ask</p>
-                {selectedCard.Questions.map((questions, index) => (
-                  <div key={index}>
-                    <li>{questions}</li>
                   </div>
-                ))}
+                )}
+
+                {/* Affirmation Section */}
+                {selectedCard.Affirmation && (
+                  <div className="mt-4">
+                    <p className="text-left text-lg font-semibold">
+                      Affirmation
+                    </p>
+                    <hr className="w-full bg-base-100 opacity-70 my-1" />
+                    <p>{selectedCard.Affirmation}</p>
+                  </div>
+                )}
+
+                {/* Questions to Ask Section */}
+                <div className="mt-4">
+                  <p className="text-left text-lg font-semibold">
+                    Questions to Ask
+                  </p>
+                  <hr className="w-full bg-base-100 opacity-70 my-1" />
+                  <ul className="list-disc list-inside">
+                    {selectedCard.Questions.map((question, index) => (
+                      <li key={index}>{question}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             )}
 
             {/* Close Button */}
-            <div className="modal-action">
+            <div className="modal-action mt-6">
               <button
-                className="btn text-xl"
+                className="btn btn-lg btn-primary w-full"
                 onClick={() => setSelectedCard(null)}
               >
                 Close
