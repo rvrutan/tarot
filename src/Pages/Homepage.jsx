@@ -93,7 +93,7 @@ export default function Homepage() {
                   <h1
                     className={`text-center text-lg mb-4 max-w-lg mx-auto transition-opacity duration-500 mt-4 ${
                       infoFadeOut ? 'opacity-0' : 'opacity-100'
-                    }`}
+                    } hidden md:block`}
                   >
                     Embark on a journey through the mystical world of Tarot, a
                     practice with roots tracing back to 15th-century Italy.
@@ -111,9 +111,9 @@ export default function Homepage() {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row justify-center gap-4 mb-4">
+            <div className="flex flex-col md:flex-row items-center gap-4 mb-4 text-center justify-center">
               {/* Reading Focus Dropdown */}
-              <div className="flex flex-col">
+              <div className="flex flex-col items-center md:items-start">
                 <label className="label">
                   <span className="label-text text-sm md:text-base">
                     What would you like your reading to focus on?
@@ -133,7 +133,7 @@ export default function Homepage() {
               </div>
 
               {/* Reader Dropdown */}
-              <div className="flex flex-col">
+              <div className="flex flex-col items-center md:items-start">
                 <label className="label">
                   <span className="label-text text-sm md:text-base">
                     Who do you want to do your reading?
