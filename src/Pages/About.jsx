@@ -57,7 +57,7 @@ export default function About() {
             <div className="flex items-center space-x-4">
               <div className="avatar">
                 <div className="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                  <img src="/profile/ryan.jpg" alt="Ryan Clouser" />
+                  <img src="/profile/ryan.jpeg" alt="Ryan Clouser" />
                 </div>
               </div>
               <div>
