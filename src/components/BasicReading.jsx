@@ -207,7 +207,7 @@ const BasicReading = ({
             transform: allRevealed ? 'translateY(0)' : 'translateY(4)',
           }}
         >
-          <h2 className="text-2xl font-semibold mb-1 text-center">
+          <h2 className="text-2xl font-semibold mb-0 pb-0 text-center bg-base-200 p-6 rounded-lg shadow-lg">
             Your Reading
           </h2>
           <p

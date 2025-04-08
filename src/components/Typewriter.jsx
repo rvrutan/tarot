@@ -17,7 +17,7 @@ const Typewriter = ({ text, speed = 30, delay = 0, onComplete }) => {
     }
   }, [currentIndex, text, speed, onComplete]);
 
-  return <div className="text-left">{displayedText}</div>;
+  return <div className="bg-base-200 p-6 rounded-lg shadow-lg text-left ">{displayedText}</div>;
 };
 
 export default Typewriter;
