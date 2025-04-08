@@ -201,14 +201,14 @@ const BasicReading = ({
       </div>
       {allRevealed && (
         <div
-          className="p-4 opacity-0 transform translate-y-4 transition-all duration-1000 ease-out text-center text-lg"
+          className="p-4 opacity-0 transform translate-y-4 transition-all duration-1000 ease-out text-left text-lg"
           style={{
             opacity: allRevealed ? 1 : 0,
             transform: allRevealed ? 'translateY(0)' : 'translateY(4)',
           }}
         >
           <h2 className="text-2xl font-semibold mb-1 text-center">
-            Tarot Reading
+            Your Reading
           </h2>
           <p
             className="opacity-0 transition-opacity duration-1000 delay-500"
@@ -216,7 +216,7 @@ const BasicReading = ({
           >
             <Typewriter
               text={reading}
-              speed={10}
+              speed={20}
               delay={500}
               onComplete={handleTypingComplete}
             />

@@ -38,28 +38,27 @@ export default function ViewAll() {
     );
   });
 
-
   const handlePageChange = (page) => {
     setCurrentPage(page); // Change to the selected page in the modal
   };
 
   return (
     <div className="container mx-auto px-2 sm:px-4 py-6">
-    {/* Search Controls */}
-    <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
-      <h1 className="text-2xl md:text-3xl font-bold mb-4 sm:mb-0">
-        All Tarot Cards
-      </h1>
-      <div className="form-control w-full sm:w-96">
-        <input
-          type="text"
-          placeholder="Search cards by name, number, or suit..."
-          className="input input-bordered w-full"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+      {/* Search Controls */}
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold mb-4 sm:mb-0">
+          All Tarot Cards
+        </h1>
+        <div className="form-control w-full sm:w-96">
+          <input
+            type="text"
+            placeholder="Search cards by name, number, or suit..."
+            className="input input-bordered w-full"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
       </div>
-    </div>
 
       {/* Card Grid */}
       <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4">
@@ -78,43 +77,50 @@ export default function ViewAll() {
       {selectedCard && (
         <dialog id="modal" className="modal modal-open">
           <div className="modal-box max-h-[90vh] overflow-y-auto z-50 relative">
-            <h2 className="text-2xl text-center font-bold mb-2">
+            <h2 className="text-3xl text-center font-bold mb-2">
               {selectedCard.name}
             </h2>
+            <div className="flex justify-center mb-1">
+              <img
+                src={`${import.meta.env.BASE_URL}cards/${selectedCard.img}`}
+                alt={selectedCard.name}
+                className="w-26 sm:w-32 h-auto rounded-md"
+              />
+            </div>
 
             {/* Tabs for page navigation */}
-            <div className="tabs tabs-boxed mb-4">
+            <div className="tabs tabs-boxed justify-center l">
               <a
                 className={`tab ${currentPage === 1 ? "tab-active" : ""}`}
                 onClick={() => handlePageChange(1)}
               >
-                Interpretations
+                Fortune Telling / Keywords
               </a>
               <a
                 className={`tab ${currentPage === 2 ? "tab-active" : ""}`}
                 onClick={() => handlePageChange(2)}
               >
-                Additional Info
+                Interpretations
               </a>
 
               <a
                 className={`tab ${currentPage === 3 ? "tab-active" : ""}`}
                 onClick={() => handlePageChange(3)}
               >
-                Additional Info Cont'd
+                More...
               </a>
             </div>
 
             {/* Conditional Rendering of Pages */}
             {currentPage === 1 && (
-              <div>
-                <p className="text-center">Fortune Telling</p>
+              <div className="">
+                <p className="text-center modal-header">Fortune Telling</p>
                 {selectedCard.fortune_telling.map((fortune, index) => (
                   <div key={index}>
                     <li>{fortune}</li>
                   </div>
                 ))}
-                <p className="text-center">Keywords</p>
+                <p className="text-center modal-header">Keywords</p>
                 {selectedCard.keywords.map((keywords, index) => (
                   <div key={index}>
                     <li className="capitalize">{keywords}</li>
@@ -125,13 +131,17 @@ export default function ViewAll() {
 
             {currentPage === 2 && (
               <div>
-                <p className="text-center">Upright Interpretations</p>
+                <p className="text-center modal-header">
+                  Upright Interpretations
+                </p>
                 {selectedCard.meanings.light.map((meaning, index) => (
                   <div key={index}>
                     <li>{meaning}</li>
                   </div>
                 ))}
-                <p className="text-center">Reversed Interpretations</p>
+                <p className="text-center modal-header">
+                  Reversed Interpretations
+                </p>
                 {selectedCard.meanings.shadow.map((meaning, index) => (
                   <div key={index}>
                     <li>{meaning}</li>
@@ -145,21 +155,23 @@ export default function ViewAll() {
                 {/* Conditionally render Mythical/Spiritual if it exists */}
                 {selectedCard.Spiritual && (
                   <>
-                    <p className="text-center">Mythical/Spiritual</p>
+                    <p className="text-center modal-header">
+                      Mythical / Spiritual
+                    </p>
                     <p>{selectedCard.Spiritual}</p>
                   </>
                 )}
 
-               {/* Conditionally render Affirmation if it exists */}
-               {selectedCard.Affirmation && (
+                {/* Conditionally render Affirmation if it exists */}
+                {selectedCard.Affirmation && (
                   <>
-                    <p className="text-center">Affirmation</p>
+                    <p className="text-center modal-header">Affirmation</p>
                     <p>{selectedCard.Affirmation}</p>
                   </>
                 )}
 
                 {/* Always render Questions to Ask since it exists on every card */}
-                <p className="text-center">Questions to Ask</p>
+                <p className="text-center modal-header">Questions to Ask</p>
                 {selectedCard.Questions.map((questions, index) => (
                   <div key={index}>
                     <li>{questions}</li>
