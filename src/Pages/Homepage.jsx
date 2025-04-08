@@ -144,10 +144,10 @@ export default function Homepage() {
                   value={selectedReader}
                   onChange={(e) => setSelectedReader(e.target.value)}
                 >
-                  <option>Josh</option>
-                  <option>Roni</option>
-                  <option>Ryan</option>
-                  <option>Tim</option>
+                  <option>Josh "the Skald"</option>
+                  <option>Roni "the Witch"</option>
+                  <option>Ryan "the Fool"</option>
+                  <option>Tim "the Bog Witch"</option>
                 </select>
               </div>
             </div>
