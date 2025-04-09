@@ -88,27 +88,24 @@ export default function Homepage() {
                 />
               </div>
 
-              <div className="container mx-auto">
-                {showInfo && (
-                  <h1
-                    className={`text-center text-lg mb-4 max-w-lg mx-auto transition-opacity duration-500 mt-4 ${
-                      infoFadeOut ? 'opacity-0' : 'opacity-100'
-                    } hidden md:block`}
-                  >
-                    Embark on a journey through the mystical world of Tarot, a
-                    practice with roots tracing back to 15th-century Italy.
-                    Initially used for games, the beautifully illustrated
-                    78-card deck evolved into a powerful tool for divination,
-                    offering profound insights into life's complexities. At
-                    ForTune, we honor this rich history while embracing modern
-                    trends and technology. Experience the ancient wisdom of the
-                    Tarot as each card reveals its meaning, accompanied by a
-                    musical chords associated with each card. Explore your past,
-                    understand your present, and glimpse potential futures with
-                    our personalized readings.{' '}
-                  </h1>
-                )}
-              </div>
+              <div
+  className={`text-center text-lg max-w-lg mx-auto overflow-hidden transition-all duration-700 ease-in-out mt-4 hidden md:block ${
+    showInfo ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+  }`}
+>
+  <h1>
+    Embark on a journey through the mystical world of Tarot, a practice with
+    roots tracing back to 15th-century Italy. Initially used for games, the
+    beautifully illustrated 78-card deck evolved into a powerful tool for
+    divination, offering profound insights into life's complexities. At
+    ForTune, we honor this rich history while embracing modern trends and
+    technology. Experience the ancient wisdom of the Tarot as each card reveals
+    its meaning, accompanied by a musical chords associated with each card.
+    Explore your past, understand your present, and glimpse potential futures
+    with our personalized readings.
+  </h1>
+</div>
+
             </div>
 
             <div className="flex flex-col md:flex-row items-center gap-4 mb-4 text-center justify-center">
