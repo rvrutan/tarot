@@ -142,6 +142,8 @@ export default function About() {
             <div className="badge badge-lg p-4">Tone.js</div>
             <div className="badge badge-lg p-4">React Router</div>
             <div className="badge badge-lg p-4">Vite</div>
+            <div className="badge badge-lg p-4">Gemini API</div>
+
           </div>
         </div>
       </div>
