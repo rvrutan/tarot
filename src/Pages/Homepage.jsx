@@ -111,7 +111,11 @@ export default function Homepage() {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center gap-4 mb-4 text-center justify-center">
+            <div
+              className={`flex flex-col md:flex-row items-center gap-4 mb-4 text-center justify-center transition-all duration-1000 ${
+                shrinkLogo ? 'translate-y-[-30px] sm:translate-y-[-50px]' : ''
+              }`}
+            >
               {/* Reading Focus Dropdown */}
               <div className="flex flex-col items-center md:items-start">
                 <label className="label">
