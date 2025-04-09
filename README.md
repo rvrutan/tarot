@@ -1,12 +1,100 @@
-# React + Vite
+# ForTune - Interactive Tarot Reading Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align="center">
+  <img src="src/assets/logo.png" alt="Fortune Tell Logo" width="200"/>
+  
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1167129c-8fa3-4d25-b324-938f83a4988c/deploy-status)](https://app.netlify.com/sites/fortune-tell/deploys)
+</div>
 
-Currently, two official plugins are available:
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
+ForTune is a modern, interactive web application that provides personalized tarot readings. Built with React and enhanced with beautiful animations, it offers users an immersive experience into the mystical world of tarot. The application features a unique combination of visual elements, sound effects, and smooth transitions to create an engaging and authentic tarot reading experience.
 
-## Expanding the ESLint configuration
+## Features
+- 🎴 Interactive 3-card tarot readings
+- 🎵 Musical accompaniment for each card reveal
+- 🎨 Smooth animations and transitions
+- 📱 Responsive design for all devices
+- 💾 Save and revisit past readings
+- 🎭 Multiple reader personalities
+- 🔮 Various reading focuses (Love, Career, School, etc.)
+- 🖼️ Beautiful card illustrations
+- 📜 Detailed card interpretations
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technologies Used
+- React.js
+- Tailwind CSS
+- DaisyUI
+- Tone.js
+- React Router
+- Vite
+- Netlify (Deployment)
+
+## Installation
+1. Clone the repository:
+```bash
+git clone https://github.com/rvrutan/tarot.git
+```
+
+2. Install dependencies:
+```bash
+cd fortune-tell
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+## Usage
+1. Visit the [live application](https://fortune-tell.netlify.app/)
+2. Select your reading focus and preferred reader
+3. Click "New Reading" to begin
+4. Click on each card to reveal your reading
+5. Save your reading for future reference
+
+## Project Structure
+```
+fortune-tell/
+├── public/
+│   ├── cards/          # Tarot card images
+│   └── profile/        # Reader profile images
+├── src/
+│   ├── components/     # React components
+│   ├── Pages/         # Page components
+│   ├── assets/        # Static assets
+│   └── main.jsx       # Application entry point
+```
+
+## Screenshots
+<!-- Add your screenshots here -->
+<div align="center">
+  <h3>Home Page</h3>
+  <img src="src/assets/ForTune-home.JPG" alt="Home Page" width="800"/>
+  
+  <h3>Reading Interface</h3>
+  <img src="src/assets/BasicReading.JPG" alt="Reading Interface" width="800"/>
+  
+  <h3>Card Reveal</h3>
+  <img src="src/assets/allcards.JPG" alt="All Cards" width="800"/>
+</div>
+
+## Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+- Tarot card data sourced from [Kaggle Tarot JSON Dataset](https://www.kaggle.com/datasets/lsind18/tarot-json)
+- Special thanks to our team of tarot readers
