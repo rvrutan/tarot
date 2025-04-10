@@ -65,10 +65,10 @@ npm run dev
 
 ## Project Structure
 ```
-fortune-tell/
+tarot/
 ├── public/
 │   ├── cards/          # Tarot card images
-│   └── profile/        # Reader profile images
+│   └── profile/        # Development team profile images
 ├── src/
 │   ├── components/     # React components
 │   ├── Pages/         # Page components
