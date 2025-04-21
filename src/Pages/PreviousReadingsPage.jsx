@@ -62,7 +62,7 @@ export default function PreviousReadingsPage() {
                   {savedReadings.map((reading) => (
                     <li
                       key={reading.key}
-                      className="px-2 py-1 border bg-base-100  hover:bg-gray-700 md:hover:bg-transparent rounded-md cursor-pointer"
+                      className="px-2 py-1 border bg-base-100  hover:bg-base-200 rounded-md cursor-pointer"
                       onClick={() => handleSelectReading(reading.key)}
                     >
                       {reading.key}
